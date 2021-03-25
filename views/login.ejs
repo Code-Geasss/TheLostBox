@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>The Box</title>
+  <meta content="" name="description">
+
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/img/favicon.png" rel="icon">
+  <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/vendor/aos/aos.css" rel="stylesheet">
+  <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+  
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="/css/signup.css" rel="stylesheet">
+
+  
+
+</head>
+<body>
+
+
+  <!-- header -->
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+      <a href="/" class="logo d-flex align-items-center">
+        <img src="/img/logo.png" alt="">
+        <span>The LostBox</span>
+      </a>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="/">Home</a></li>
+          <li><a class="nav-link scrollto" href="#about">About</a></li>
+          <li><a class="nav-link scrollto" href="/box">The Box</a></li>
+          <li><a class="nav-link scrollto" href="#team">Team</a></li>
+          
+          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">Drop Down 1</a></li>
+              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+                <ul>
+                  <li><a href="#">Deep Drop Down 1</a></li>
+                  <li><a href="#">Deep Drop Down 2</a></li>
+                  <li><a href="#">Deep Drop Down 3</a></li>
+                  <li><a href="#">Deep Drop Down 4</a></li>
+                  <li><a href="#">Deep Drop Down 5</a></li>
+                </ul>
+              </li>
+              <li><a href="#">Drop Down 2</a></li>
+              <li><a href="#">Drop Down 3</a></li>
+              <li><a href="#">Drop Down 4</a></li>
+            </ul>
+          </li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <li><a class="nav-link scrollto" href="/LogIn">Login</a></li>
+          <li><a class="nav-link scrollto" href="/Signup">Sign-Up</a></li>
+          <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+<div class="spacecontainer"></div>
+<div class="container">
+  <div id="login-box">    
+    <div class="left">
+      <% if(hasError){ %>
+        <div class="alert alert-danger">
+            <% messages.forEach(function(errmessage){ %>
+                <p style="text-align: center;"><%= errmessage %></p>
+            <% }) %>
+        </div>
+      <% } %>
+      
+      <h1>Login</h1>
+      <form action="/LogIn" method="POST">
+        <input type="email" name="email" placeholder="E-mail" />
+        
+        <input type="password" name="password" placeholder="Password" />
+      
+        
+        <input type="submit" name="signup_submit" value="login" />
+      </form>
+    </div>
+    
+    <div class="right">
+      <span style="color:grey" class="loginwith">Sign in with<br />social network</span>
+      <a href="/logIn/google">
+        <button class="social-signin google">Signup with Google+</button></a>
+    </div>
+    <div class="or">OR</div>
+  </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
