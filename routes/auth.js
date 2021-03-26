@@ -9,9 +9,6 @@ router.get('/',function(req,res){
     res.render('index');
 });
 
-router.get('/box',function(req,res){
-    res.render('thebox');
-});
 
 router.get('/Signup', function (req, res) {
     var messages = req.flash('error');

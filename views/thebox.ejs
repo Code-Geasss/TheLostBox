@@ -165,37 +165,16 @@
                   </div>  
                   <br>
                   <br>
-                  
+                  <% posts.forEach(function(post){ %>
                   <div style="width: 300px; float:left; margin:10px">
-                    <img src="/img/items/bag1.jfif" alt=""><br>
+                    <img src='/images/aeroplane.jpg' alt=""><br>
                     <br>
-                    <h5 style="text-align: center">Backpack</h5>
-                    <h6 style="text-align: center">Category:Bags</h6>
+                    <h5 style="text-align: center"><a href="/box/<%= post._id %>" title="View Post"><span><%= post.title %></span></a></h5>
+                    <h6 style="text-align: center">Category: <%= post.category %></h6>
 
                   </div>
-                  <div style="width: 300px; float:left; margin:10px">
-                    <img src="/img/items/bag1.jfif" alt=""><br>
-                    <br>
-                    <h5 style="text-align: center">Backpack</h5>
-                    <h6 style="text-align: center">Category:Bags</h6>
-
-                  </div>
-
-                  <div style="width: 300px; float:left; margin:10px">
-                    <img src="/img/items/bag1.jfif" alt=""><br>
-                    <br>
-                    <h5 style="text-align: center">Backpack</h5>
-                    <h6 style="text-align: center">Category:Bags</h6>
-
-                  </div>
-                  <div style="width: 300px; float:left; margin:10px">
-                    <img src="/img/items/bag1.jfif" alt=""><br>
-                    <br>
-                    <h5 style="text-align: center">Backpack</h5>
-                    <h6 style="text-align: center">Category:Bags</h6>
-
-                  </div>
-                  <div style="width: 300px; float:left; margin:10px">
+                  <% }) %>
+                  <!-- <div style="width: 300px; float:left; margin:10px">
                     <img src="/img/items/bag1.jfif" alt=""><br>
                     <br>
                     <h5 style="text-align: center">Backpack</h5>
@@ -210,7 +189,13 @@
                     <h6 style="text-align: center">Category:Bags</h6>
 
                   </div>
+                  <div style="width: 300px; float:left; margin:10px">
+                    <img src="/img/items/bag1.jfif" alt=""><br>
+                    <br>
+                    <h5 style="text-align: center">Backpack</h5>
+                    <h6 style="text-align: center">Category:Bags</h6>
 
+                  </div>
                   <div style="width: 300px; float:left; margin:10px">
                     <img src="/img/items/bag1.jfif" alt=""><br>
                     <br>
@@ -234,6 +219,22 @@
                     <h6 style="text-align: center">Category:Bags</h6>
 
                   </div>
+
+                  <div style="width: 300px; float:left; margin:10px">
+                    <img src="/img/items/bag1.jfif" alt=""><br>
+                    <br>
+                    <h5 style="text-align: center">Backpack</h5>
+                    <h6 style="text-align: center">Category:Bags</h6>
+
+                  </div>
+
+                  <div style="width: 300px; float:left; margin:10px">
+                    <img src="/img/items/bag1.jfif" alt=""><br>
+                    <br>
+                    <h5 style="text-align: center">Backpack</h5>
+                    <h6 style="text-align: center">Category:Bags</h6>
+
+                  </div> -->
 
 
 

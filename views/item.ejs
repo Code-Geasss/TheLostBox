@@ -11,23 +11,23 @@
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="/img/favicon.png" rel="icon">
+  <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/vendor/aos/aos.css" rel="stylesheet">
+  <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
 
   
-  <link href="assets/css/style.css" rel="stylesheet">
-  <link href="assets/css/thebox.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
+  <link href="/css/thebox.css" rel="stylesheet">
 
   
 
@@ -39,16 +39,16 @@
   <header id="header" class="header fixed-top">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
-        <img src="assets/img/logo.png" alt="">
+      <a href="/" class="logo d-flex align-items-center">
+        <img src="/img/logo.png" alt="">
         <span>The LostBox</span>
       </a>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li><a class="nav-link scrollto active" href="/">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="thebox.html">The Box</a></li>
+          <li><a class="nav-link scrollto" href="/box">The Box</a></li>
           <li><a class="nav-link scrollto" href="#team">Team</a></li>
           
           <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
@@ -155,19 +155,19 @@
                 
                 <div class="container">
                   <div style="width: 400px; height :400px ;float:left;  margin:10px">
-                  <img src="assets/img/items/bag1.jfif" style="width: 400px; height :400px ; object-fit:fill" alt="">
+                  <img src="<%= post.photo %>" style="width: 400px; height :400px ; object-fit:fill" alt="">
                   
 
                 </div>
                 <div style="width: 400px; height :500px ;float:left;  margin:10px">
-                    <h1>Backpack</h1>
+                    <h1><%= post.title %></h1>
                     <br>
-                    <h6><b>Location:</b> Bhaskaracharya Building</h6><br>
-                    <h6><b>Description:</b> A blue colored backpack having K word keychain attached to it.</h6><br>
-                    <h6><b>Person to Contact:</b>  Kunal Rane</h6><br>
-                    <h6><b>Email:</b><a href="#"> kunal.sr@somaiya.edu</a> </h6><br><br>
-                    <h6><b>Color:</b>Blue </h6><br>
-                    <h6><b>Size:</b>Large </h6><br>
+                    <h6><b>Location:</b> <%= post.location %></h6><br>
+                    <h6><b>Description:</b> <%= post.description %></h6><br>
+                    <h6><b>Person to Contact:</b>  <%= post.postedBy.fullname %></h6><br>
+                    <h6><b>Email:</b><a href="mailto:<%= post.postedBy.email %>"> <%= post.postedBy.email %></a> </h6><br><br>
+                    <h6><b>Color:</b> Blue </h6><br>
+                    <h6><b>Category:</b> <%= post.category %> </h6><br>
                     
   
                 </div>

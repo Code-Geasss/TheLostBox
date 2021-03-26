@@ -50,6 +50,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(expressValidator());
 app.use(cors());
+app.use("/images",express.static(path.join(__dirname, 'images')));
 app.use(express.static(path.join(__dirname, 'assets')));
 
 

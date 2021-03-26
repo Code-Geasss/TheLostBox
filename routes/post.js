@@ -61,6 +61,34 @@ router.get('/post/create',isAuthenticated,function(req,res){
     res.render('upload',{currentUser: req.user});
 });
 
+router.get('/box',isAuthenticated,function(req,res){
+    Post.find({},function(err,allposts){
+        if(err)
+        {
+            console.log(err);
+        }
+        else{
+            res.render('thebox',{posts:allposts});
+        }
+    });
+});
+
+router.get('/box/:id',isAuthenticated,function(req,res){
+    var postid=req.params.id;
+    Post.findOne({_id:postid}).
+    populate('postedBy').
+    exec(function(err,foundpost){
+        if(err){
+            console.log(err);
+        }
+        else
+        {
+            res.render('item',{post:foundpost});
+        }
+    });
+});
+
+
 //router.put("/post/:postId", isAuthenticated , isPoster, updatePost);
 
 module.exports = router;
