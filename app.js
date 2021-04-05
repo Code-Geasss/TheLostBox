@@ -57,95 +57,100 @@ app.use(express.static(path.join(__dirname, 'assets')));
 const Socket = require('./models/socket');
 const Chat = require('./models/chat');
 
-// io.on('connection', async (socket) => {
-//     console.log('CLIENT CONNECTED')
-//     socket.on('userInfo',(user) => {
-//         Socket.findOne({email: user.email}, function(err,res) {
-//             if(!res){
-//                 let newSocket = new Socket({
-//                     socketId: socket.id,
-//                     user: user,
-//                     email: user.email
-//                 })
-//                 newSocket.save((err,result) => {
-//                     if(err){
-//                         console.log(err)
-//                     } else {
-//                         console.log("ADDED TO DB ", socket.id)
-//                     }
-//                 })
-//             } else {
-//                 Socket.findOneAndUpdate({email: user.email} ,{$set: {"socketId": socket.id}}, (err,result) => {
-//                     if(err){
-//                         console.log(err)
-//                     }else{
-//                         console.log("UPDATED");
-//                     }
-//                 })
-//             }   
-//         })
-//     })
-//     socket.on('sendMessage', (message, sender, reciever, callback) => {
-//         const senderId = sender._id;
-//         const recieverId = reciever._id;
-//         Socket.findOne({email: reciever.email})
-//         .exec(async function(err,res) {
-//             if(res!=null){
-//                 console.log("SENT")
-//                 const newChat = new Chat({
-//                     message,
-//                     reciever,
-//                     sender
-//                 });
-//                 await newChat.save((err,result) => {
-//                     if(err){
-//                         console.log(err)
-//                     } else {
-//                         console.log("--------------------------------");
-//                         console.log("CHAT SAVED");
-//                         console.log("--------------------------------");
-//                     }
-//                 })
-//                 // const allChats = await Chat.find({ $or: [{ 'reciever._id': recieverId, 'sender._id': senderId },{ 'sender._id': recieverId, 'reciever._id': senderId }] })
-//                 console.log("emitting online")
-//                 io.to(res.socketId).emit('message', newChat);
-//                 socket.emit('message', newChat);
+app.get('/chat', (req, res, next)=>{
+    res.render('chat');
+})
 
-//             } else {
-//                 const newChat = new Chat({
-//                     message,
-//                     reciever,
-//                     sender
-//                 });
-//                 await newChat.save((err,result) => {
-//                     if(err){
-//                         console.log(err)
-//                     } else {
-//                         console.log("--------------------------------");
-//                         console.log("OFFLINE CHAT SAVED");
-//                         console.log("--------------------------------");
-//                     }
-//                 })
-//                 // const allChats = await Chat.find({ $or: [{ 'reciever._id': recieverId, 'sender._id': senderId },{ 'sender._id': recieverId, 'reciever._id': senderId }] })
-//                 console.log("emitting offline")
-//                 socket.emit('message', newChat);
-//             }
-//         })
-//         callback();
-//     });
+io.on('connection', async (socket) => {
+    console.log('CLIENT CONNECTED')
+    socket.on('userInfo',(user) => {
+        Socket.findOne({email: user.email}, function(err,res) {
+            if(!res){
+                let newSocket = new Socket({
+                    socketId: socket.id,
+                    user: user,
+                    email: user.email
+                })
+                newSocket.save((err,result) => {
+                    if(err){
+                        console.log(err)
+                    } else {
+                        console.log("ADDED TO DB ", socket.id)
+                    }
+                })
+            } else {
+                Socket.findOneAndUpdate({email: user.email} ,{$set: {"socketId": socket.id}}, (err,result) => {
+                    if(err){
+                        console.log(err)
+                    }else{
+                        console.log("UPDATED");
+                    }
+                })
+            }   
+        })
+    })
+    socket.on('sendMessage', (message, sender, reciever, callback) => {
+        const senderId = sender._id;
+        const recieverId = reciever._id;
+        Socket.findOne({email: reciever.email})
+        .exec(async function(err,res) {
+            if(res!=null){
+                console.log("SENT")
+                const newChat = new Chat({
+                    message,
+                    reciever,
+                    sender
+                });
+                await newChat.save((err,result) => {
+                    if(err){
+                        console.log(err)
+                    } else {
+                        console.log("--------------------------------");
+                        console.log("CHAT SAVED");
+                        console.log("--------------------------------");
+                    }
+                })
+                // const allChats = await Chat.find({ $or: [{ 'reciever._id': recieverId, 'sender._id': senderId },{ 'sender._id': recieverId, 'reciever._id': senderId }] })
+                console.log("emitting online")
+                io.to(res.socketId).emit('message', newChat);
+                socket.emit('message', newChat);
 
-//     socket.on('disconnect', () => {
-//         Socket.findOne({socketId: socket.id})
-//         .remove((err, result) => {
-//             if(err){
-//                 console.log(err)
-//             } else {
-//                 console.log("DELETED");
-//             }
-//         })
-//         console.log("DISCONNECTED")
-//     })
-// })
+            } else {
+                const newChat = new Chat({
+                    message,
+                    reciever,
+                    sender
+                });
+                await newChat.save((err,result) => {
+                    if(err){
+                        console.log(err)
+                    } else {
+                        console.log("--------------------------------");
+                        console.log("OFFLINE CHAT SAVED");
+                        console.log("--------------------------------");
+                    }
+                })
+                // const allChats = await Chat.find({ $or: [{ 'reciever._id': recieverId, 'sender._id': senderId },{ 'sender._id': recieverId, 'reciever._id': senderId }] })
+                console.log("emitting offline")
+                socket.emit('message', newChat);
+            }
+        })
+        callback();
+    });
+
+    socket.on('disconnect', () => {
+        Socket.findOne({socketId: socket.id})
+        .remove((err, result) => {
+            if(err){
+                console.log(err)
+            } else {
+                console.log("DELETED");
+            }
+        })
+        console.log("DISCONNECTED")
+    });
+});
+
 app.use(session({
     secret: 'supersecret',
     resave: false,

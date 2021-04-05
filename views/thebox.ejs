@@ -167,7 +167,7 @@
                   <br>
                   <% posts.forEach(function(post){ %>
                   <div style="width: 300px; float:left; margin:10px">
-                    <img src='/images/aeroplane.jpg' alt=""><br>
+                    <img src='<%= post.photo %>' alt=""><br>
                     <br>
                     <h5 style="text-align: center"><a href="/box/<%= post._id %>" title="View Post"><span><%= post.title %></span></a></h5>
                     <h6 style="text-align: center">Category: <%= post.category %></h6>

@@ -15,13 +15,6 @@ exports.getChats = (req,res) => {
     });
 };
 
-exports.getAllChatsRn = (req, res) => {
-    Chat.find()
-    .then(chats => {
-        res.json(chats)
-    })
-    .catch(err => console.log(err));
-};
 
 exports.chatList = async (req,res) => {
     const senderId = req.params.senderId;
@@ -30,7 +23,7 @@ exports.chatList = async (req,res) => {
     let chatList = await chatList1.concat(chatList2);
     let distinctChatList = [...new Set(chatList)]
     User.find({ _id: { $in: distinctChatList } })
-    .select('name email created updated notificationToken')
+    .select('fullname email created updated')
     .exec((err,data) => {
         if(err || !data){
             res.status(400).json({
@@ -38,18 +31,5 @@ exports.chatList = async (req,res) => {
             })
         }
         res.json(data);
-    });
-};
-
-exports.getOnlineUsers = (req,res) => {
-    Socket.find()
-    .select('user._id')
-    .exec((err, result) => {
-        if(err || !result){
-            return res.status(400).json({
-                error: err
-            });
-        }
-        res.json(result);
     });
 };
