@@ -57,13 +57,11 @@ app.use(express.static(path.join(__dirname, 'assets')));
 const Socket = require('./models/socket');
 const Chat = require('./models/chat');
 
-app.get('/chat', (req, res, next)=>{
-    res.render('chat');
-})
 
 io.on('connection', async (socket) => {
     console.log('CLIENT CONNECTED')
     socket.on('userInfo',(user) => {
+        console.log(user);
         Socket.findOne({email: user.email}, function(err,res) {
             if(!res){
                 let newSocket = new Socket({
@@ -88,17 +86,18 @@ io.on('connection', async (socket) => {
                 })
             }   
         })
-    })
-    socket.on('sendMessage', (message, sender, reciever, callback) => {
+    });
+
+    socket.on('sendMessage', (message, sender, receiver, callback) => {
         const senderId = sender._id;
-        const recieverId = reciever._id;
-        Socket.findOne({email: reciever.email})
+        const receiverId = receiver._id;
+        Socket.findOne({email: receiver.email})
         .exec(async function(err,res) {
             if(res!=null){
                 console.log("SENT")
                 const newChat = new Chat({
                     message,
-                    reciever,
+                    receiver,
                     sender
                 });
                 await newChat.save((err,result) => {
@@ -110,7 +109,7 @@ io.on('connection', async (socket) => {
                         console.log("--------------------------------");
                     }
                 })
-                // const allChats = await Chat.find({ $or: [{ 'reciever._id': recieverId, 'sender._id': senderId },{ 'sender._id': recieverId, 'reciever._id': senderId }] })
+                // const allChats = await Chat.find({ $or: [{ 'receiver._id': receiverId, 'sender._id': senderId },{ 'sender._id': receiverId, 'receiver._id': senderId }] })
                 console.log("emitting online")
                 io.to(res.socketId).emit('message', newChat);
                 socket.emit('message', newChat);
@@ -118,7 +117,7 @@ io.on('connection', async (socket) => {
             } else {
                 const newChat = new Chat({
                     message,
-                    reciever,
+                    receiver,
                     sender
                 });
                 await newChat.save((err,result) => {
@@ -130,14 +129,17 @@ io.on('connection', async (socket) => {
                         console.log("--------------------------------");
                     }
                 })
-                // const allChats = await Chat.find({ $or: [{ 'reciever._id': recieverId, 'sender._id': senderId },{ 'sender._id': recieverId, 'reciever._id': senderId }] })
+                // const allChats = await Chat.find({ $or: [{ 'receiver._id': receiverId, 'sender._id': senderId },{ 'sender._id': receiverId, 'receiver._id': senderId }] })
                 console.log("emitting offline")
+                //console.log(newChat);
                 socket.emit('message', newChat);
             }
         })
         callback();
     });
-
+    socket.on('refresh', function(){
+        io.emit('new refresh', {});
+    });
     socket.on('disconnect', () => {
         Socket.findOne({socketId: socket.id})
         .remove((err, result) => {

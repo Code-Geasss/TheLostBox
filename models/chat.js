@@ -6,7 +6,7 @@ const chatSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    reciever: {
+    receiver: {
         type: Object,
         required: true
     },
