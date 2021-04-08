@@ -13,7 +13,7 @@ router.get('/chatlist/:senderId',isAuthenticated,async function(req,res){
     let chatList = await chatList1.concat(chatList2);
     let distinctChatList = [...new Set(chatList)]
     User.find({ _id: { $in: distinctChatList } })
-    .select('name email created updated ')
+    .select('fullname email created updated ')
     .exec((err,data) => {
         if(err || !data){
             res.status(400).json({
@@ -21,7 +21,7 @@ router.get('/chatlist/:senderId',isAuthenticated,async function(req,res){
             })
         }
         //console.log(data);
-        res.render('chatdef',{data:data});
+        res.render('chatdef',{data:data,currentuser:req.user});
     });
 });
 

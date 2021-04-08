@@ -46,15 +46,12 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="/">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="/box">The Box</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+          <li><a class="nav-link scrollto active" href="/">Home</a></li>       
+          <li><a class="nav-link scrollto" href="/box">The Box</a></li>  
+          <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+              <li><a href="/chatlist/<%= currentUser._id %>">Chats</a></li>
+              <!-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="#">Deep Drop Down 1</a></li>
                   <li><a href="#">Deep Drop Down 2</a></li>
@@ -62,19 +59,14 @@
                   <li><a href="#">Deep Drop Down 4</a></li>
                   <li><a href="#">Deep Drop Down 5</a></li>
                 </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
+              </li> -->
+              <li><a href="/logout">Logout</a></li>
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="nav-link scrollto" href="login.html">Login</a></li>
-          <li><a class="nav-link scrollto" href="signup.html">Sign-Up</a></li>
-          <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
+
 
     </div>
   </header><!-- End Header -->
@@ -84,18 +76,20 @@
         <div id="container">
             <aside>
                 <header>
-                    <input type="text" placeholder="search">
+                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="search">
                 </header>
-                <ul>
+                <ul id="myMenu">
                     <li>
+                      <a href="/chats/<%= currentuser._id %>/<%= receiveruser._id %>">
                         <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="">
-                        <div>
-                            <h2></h2>
-                            <h3>
+                        <div id="chin">
+                            <h2><%= receiveruser.fullname %></h2>
+                            <!-- <h3>
                                 <span class="status orange"></span>
                                 offline
-                            </h3>
+                            </h3> -->
                         </div>
+                      </a>
                     </li>
                 </ul>
             </aside>
@@ -103,7 +97,7 @@
                 <header>
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="">
                     <div>
-                        <h2>Chat</h2>
+                        <h2>Chat with <%= receiveruser.fullname %></h2>
                     </div>
                 </header>
                 <ul id="chat">
@@ -166,24 +160,71 @@
               var socket=io();
               socket.on('connect',()=>{
                   //console.log(sender);
-                  console.log(receiver);
+                  //console.log(receiver);
                   socket.emit('userInfo',sender);
               });
               $('#message_form').on('submit', function(e){
                   e.preventDefault();                 
                   var message = $('#msg').val(); 
                   
-                  //console.log(receiver);                
+                  // console.log(receiver);                
                   if(message.trim().length > 0){
                       socket.emit('sendMessage',message,sender,receiver, function(){
                           $('#msg').val('');
                       });
                   }
               });
-              socket.on('new refresh', function(){
-                $('#reload').load(location.href + ' #reload');
-              });           
+              socket.on('message',(newchat)=>{
+                console.log(newchat);
+                if(newchat.sender._id==sender._id)
+                {
+                  var html = '<li class="me">'  + 
+                          '<div class="entete">' + 
+                              '<h3>' + newchat.time + '</h3>' +
+                              '<h2>' + newchat.sender.name + '</h2>' +
+                              '<span class="status blue"></span>' +
+                          '</div>'+
+                          '<div class="triangle"></div>' +
+                          '<div class="message">' +
+                            newchat.message + 
+                          '</div>'
+                      '</li>'
+                  $('#chat').append(html).stop().animate({scrollTop:$("#chat")[0].scrollHeight},1000);    
+                }
+                else
+                {
+                  var html = '<li class="you">'  + 
+                          '<div class="entete">' + 
+                              '<h3>' + newchat.time + '</h3>' +
+                              '<h2>' + newchat.sender.name + '</h2>' +
+                              '<span class="status green"></span>' +
+                          '</div>'+
+                          '<div class="triangle"></div>' +
+                          '<div class="message">' +
+                            newchat.message + 
+                          '</div>'
+                      '</li>'
+                    $('#chat').append(html).stop().animate({scrollTop:$("#chat")[0].scrollHeight},1000);
+                }
+              });         
           });
+          function myFunction() {
+              var input, filter, ul, li, a, i;
+              input = document.getElementById("myInput");
+              filter = input.value.toUpperCase();
+              ul = document.getElementById("myMenu");
+              li = ul.getElementsByTagName("li");
+
+              // Loop through all list items, and hide those who don't match the search query
+              for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0].querySelector("#chin h2").firstChild.nodeValue;
+                if (a.toUpperCase().indexOf(filter) > -1) {
+                  li[i].style.display = "";
+                } else {
+                  li[i].style.display = "none";
+                }
+              }
+            }
         </script>
     
 </body>

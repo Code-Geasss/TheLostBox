@@ -68,7 +68,7 @@ router.get('/box',isAuthenticated,function(req,res){
             console.log(err);
         }
         else{
-            res.render('thebox',{posts:allposts});
+            res.render('thebox',{posts:allposts,currentUser:req.user});
         }
     });
 });

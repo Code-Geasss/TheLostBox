@@ -46,15 +46,12 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto active" href="/">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="/box">The Box</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+          <li><a class="nav-link scrollto active" href="/">Home</a></li>       
+          <li><a class="nav-link scrollto" href="/box">The Box</a></li>  
+          <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+              <li><a href="/chatlist/<%= currentUser._id %>">Chats</a></li>
+              <!-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="#">Deep Drop Down 1</a></li>
                   <li><a href="#">Deep Drop Down 2</a></li>
@@ -62,19 +59,14 @@
                   <li><a href="#">Deep Drop Down 4</a></li>
                   <li><a href="#">Deep Drop Down 5</a></li>
                 </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
+              </li> -->
+              <li><a href="/logout">Logout</a></li>
             </ul>
           </li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="nav-link scrollto" href="login.html">Login</a></li>
-          <li><a class="nav-link scrollto" href="signup.html">Sign-Up</a></li>
-          <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
+
 
     </div>
   </header><!-- End Header -->
@@ -84,65 +76,58 @@
         <div id="container">
             <aside>
                 <header>
-                    <input type="text" placeholder="search">
+                    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="search">
                 </header>
-                <ul>
+                <ul id="myMenu">
+                  <% data.forEach(function(chat) { %>
                     <li>
+                      <a href="/chats/<%= currentuser._id %>/<%= chat._id %>">
                         <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="">
-                        <div>
-                            <h2></h2>
-                            <h3>
+                        <div id="chin">
+                            <h2><%= chat.fullname %></h2>
+                            <!-- <h3>
                                 <span class="status orange"></span>
                                 offline
-                            </h3>
+                            </h3> -->
                         </div>
+                      </a>
                     </li>
+                    <% }) %>
                 </ul>
             </aside>
             <main>
                 <header>
                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="">
                     <div>
-                        <h2>Chat with Vincent Porter</h2>
-                        <h3>already 1902 messages</h3>
+                        <h2>Chat</h2>
                     </div>
                 </header>
-                <ul id="chat">
-                    <li class="you">
-                        <div class="entete">
-                            <span class="status green"></span>
-                            <h2>Vincent</h2>
-                            <h3>10:12AM, Today</h3>
-                        </div>
-                        <div class="triangle"></div>
-                        <div class="message">
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                        </div>
-                    </li>
-                    <li class="me">
-                        <div class="entete">
-                            <h3>10:12AM, Today</h3>
-                            <h2>Vincent</h2>
-                            <span class="status blue"></span>
-                        </div>
-                        <div class="triangle"></div>
-                        <div class="message">
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-                        </div>
-                    </li>
-                </ul>
-                <footer>
-                  <form id="message_form" method="post">
-                    <textarea name="message" id="msg" placeholder="Type your message"></textarea>
-                   
-                  </form>
-                </footer>
             </main>
         </div>
 
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <script src="/js/main.js"></script>
+
+        <script>
+          function myFunction() {
+              var input, filter, ul, li, a, i;
+              input = document.getElementById("myInput");
+              filter = input.value.toUpperCase();
+              ul = document.getElementById("myMenu");
+              li = ul.getElementsByTagName("li");
+
+              // Loop through all list items, and hide those who don't match the search query
+              for (i = 0; i < li.length; i++) {
+                a = li[i].getElementsByTagName("a")[0].querySelector("#chin h2").firstChild.nodeValue;
+                if (a.toUpperCase().indexOf(filter) > -1) {
+                  li[i].style.display = "";
+                } else {
+                  li[i].style.display = "none";
+                }
+              }
+            }
+        </script>
 
     
 </body>

@@ -137,9 +137,6 @@ io.on('connection', async (socket) => {
         })
         callback();
     });
-    socket.on('refresh', function(){
-        io.emit('new refresh', {});
-    });
     socket.on('disconnect', () => {
         Socket.findOne({socketId: socket.id})
         .remove((err, result) => {
