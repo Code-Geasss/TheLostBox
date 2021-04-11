@@ -114,9 +114,9 @@
       <div style="text-align: center;" id="danger" class="alert alert-danger <% if(noMessages){ %> d-none <% } %>" >
         <%= errMsg %>
       </div>
-        <form action="/post/create" method="POST" enctype="multipart/form-data">
+        <form action="/post/<%= post.posts[0].category %>/<%= post.posts[0]._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
             <label for="fname">Title</label>
-            <input type="text" id="fname" name="title" placeholder="Title.."><br>
+            <input type="text" id="fname" name="title" value="<%= post.posts[0].title %>" placeholder="Title.."><br>
         
             <!-- <label for="lname">Last Name</label>
             <input type="text" id="lname" name="lastname" placeholder="Your last name..">
@@ -125,10 +125,10 @@
             <input type="text" id="itemtype" name="itemtype" placeholder="Type of item found">
             <br> -->
             <label for="location">Location</label>
-            <input type="text" id="location" name="location" placeholder="Location of item found">
+            <input type="text" id="location" name="location" value="<%= post.posts[0].location %>" placeholder="Location of item found">
             <br>
             <label for="size">Category</label>
-            <select id="size" name="category">
+            <select id="size" name="category" disabled>
                 <option value="electronics">ELECTRONICS</option>
                 <option value="Wallets">WALLETS</option>
                 <option value="cards">CARDS</option>
@@ -136,7 +136,7 @@
             </select><br>
             <br>
             <label for="description">Description</label>
-            <textarea id="description" name="description" placeholder="Describe the item.." style="height:200px"></textarea>
+            <textarea id="description" name="description" placeholder="Describe the item.." style="height:200px"><%= post.posts[0].description %></textarea>
             <br>
             <br>
             <div class="center">

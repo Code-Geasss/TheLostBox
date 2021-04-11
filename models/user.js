@@ -39,14 +39,6 @@ const userSchema = new mongoose.Schema({
     },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
-    items: [
-        {
-            image : {data: Buffer, contentType: String},
-            title : {type: String, required: true},
-            category: {type: String, required: true},
-            description: {type: String, required: true}
-        }
-    ]
 });
 
 //virtual field

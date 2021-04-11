@@ -16,6 +16,7 @@ const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
 const cors = require('cors');
 const passport = require('passport');
+var methodOverride = require("method-override");
 
 const flash = require('connect-flash');
 const dotenv = require('dotenv');
@@ -38,7 +39,7 @@ mongoose.connection.on('error', err => {
 
 const postRoutes = require('./routes/post');
 const authRoutes = require('./routes/auth');
-//const userRoutes = require('./routes/user');
+const userRoutes = require('./routes/user');
 const chatRoutes = require('./routes/chat');
 
 app.set('views', path.join(__dirname, 'views'));
@@ -159,6 +160,7 @@ app.use(session({
   }));
 
 app.use(flash());
+app.use(methodOverride("_method"));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -171,6 +173,7 @@ app.use(function(req, res, next){
 app.use(authRoutes);
 app.use(postRoutes);
 app.use(chatRoutes);
+app.use(userRoutes);
 
 
 
