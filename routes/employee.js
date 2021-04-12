@@ -1,7 +1,7 @@
 
 var express = require('express');
 var router = express.Router();
-var empModel = require('./models/employee');
+var empModel = require('../models/employee');
 var employee = empModel.find({});
 
 router.get("/form",function(req,res,next){

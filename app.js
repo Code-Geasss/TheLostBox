@@ -41,6 +41,7 @@ const postRoutes = require('./routes/post');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const chatRoutes = require('./routes/chat');
+const employeeRoutes = require('./routes/employee');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -174,6 +175,7 @@ app.use(authRoutes);
 app.use(postRoutes);
 app.use(chatRoutes);
 app.use(userRoutes);
+app.use(employeeRoutes);
 
 
 
