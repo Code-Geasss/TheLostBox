@@ -7,7 +7,7 @@ var employee = empModel.find({});
 router.get("/form",function(req,res,next){
     employee.exec(function(err,data){
         if(err) throw err;
-        res.render('form',{title : 'Employee Records', recrods:data});
+        res.render('form',{title : 'Employee Records', records:data});
     });
 });
 
@@ -24,7 +24,7 @@ router.post("/form",function(req,res,next){
         if(err) throw err;
         employee.exec(function(err,data){
             if(err) throw err;
-            res.render('form',{title : 'Employee Records', recrods:data});
+            res.render('form',{title : 'Employee Records', records:data});
         });
     });
 
