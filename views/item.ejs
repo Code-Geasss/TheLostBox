@@ -50,7 +50,7 @@
           <li><a class="nav-link scrollto" href="/box">The Box</a></li>  
           <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="/chatlist/<%= currentUser._id %>">Chats</a></li>
+              <li><a href="/chatlist">Chats</a></li>
               <!-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
                   <li><a href="#">Deep Drop Down 1</a></li>
@@ -147,19 +147,19 @@
                 
                 <div class="container">
                   <div style="width: 400px; height :400px ;float:left;  margin:10px">
-                  <img src="<%= post.photo %>" style="width: 400px; height :400px ; object-fit:fill" alt="">
+                  <img src="<%= data.posts[0].photo %>" style="width: 400px; height :400px ; object-fit:fill" alt="">
                   
 
                 </div>
                 <div style="width: 400px; height :500px ;float:left;  margin:10px">
-                    <h1><%= post.title %></h1>
+                    <h1><%= data.posts[0].title %></h1>
                     <br>
-                    <h6><b>Location:</b> <%= post.location %></h6><br>
-                    <h6><b>Description:</b> <%= post.description %></h6><br>
-                    <h6><b>Person to Contact:</b>  <%= post.postedBy.fullname %></h6><br>
-                    <h6><b>Email:</b><a href="mailto:<%= post.postedBy.email %>"> <%= post.postedBy.email %></a> </h6><br><br>
+                    <h6><b>Location:</b> <%= data.posts[0].title %></h6><br>
+                    <h6><b>Description:</b> <%= data.posts[0].title %></h6><br>
+                    <h6><b>Person to Contact:</b>  <%= data.posts[0].postedBy.fullname %></h6><br>
+                    <h6><b>Email:</b><a href="mailto:<%= data.posts[0].postedBy.email %>"> <%= data.posts[0].postedBy.email %></a> </h6><br><br>
                     <h6><b>Color:</b> Blue </h6><br>
-                    <h6><b>Category:</b> <%= post.category %> </h6><br>
+                    <h6><b>Category:</b> <%= data.posts[0].category %> </h6><br>
                     
   
                 </div>

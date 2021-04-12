@@ -194,29 +194,29 @@ router.delete('/post/:id',isAuthenticated,function(req,res){
     });
 });
 
-router.get('/box',isAuthenticated,function(req,res){
-    Post.find({},function(err,allposts){
-        if(err)
-        {
-            console.log(err);
-        }
-        else{
-            res.render('thebox',{posts:allposts,currentUser:req.user});
-        }
-    });
-});
+// router.get('/box',isAuthenticated,function(req,res){
+//     Post.find({},function(err,allposts){
+//         if(err)
+//         {
+//             console.log(err);
+//         }
+//         else{
+//             console.log(allposts);
+//             //res.render('thebox',{posts:allposts,currentUser:req.user});
+//         }
+//     });
+// });
 
 router.get('/box/:id',isAuthenticated,function(req,res){
     var postid=req.params.id;
-    Post.findOne({_id:postid}).
-    populate('postedBy').
-    exec(function(err,foundpost){
-        if(err){
-            console.log(err);
-        }
-        else
-        {
-            res.render('item',{post:foundpost});
+    console.log(postid);
+    
+    Post.find({ "posts._id" : postid},{posts:{ $elemMatch:{_id:postid}}},function(err,result){
+        if(err) console.log(err);
+        else{
+        var data = result[0];
+        console.log(data);       
+        res.render("item", {data: data});
         }
     });
 });

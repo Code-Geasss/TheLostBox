@@ -156,15 +156,17 @@
                   </div>  
                   <br>
                   <br>
-                  <% posts.forEach(function(post){ %>
-                  <div style="width: 300px; float:left; margin:10px">
-                    <img src='<%= post.photo %>' alt=""><br>
-                    <br>
-                    <h5 style="text-align: center"><a href="/box/<%= post._id %>" title="View Post"><span><%= post.title %></span></a></h5>
-                    <h6 style="text-align: center">Category: <%= post.category %></h6>
+                  <% for (index in data) { %>
+                    <% for (index1 in data[index].posts) { %>
+                      <div style="width: 300px; float:left; margin:10px">
+                        <img src='<%= data[index].posts[index1].photo %>' alt=""><br>
+                        <br>
+                        <h5 style="text-align: center"><a href="/box/<%= data[index].posts[index1]._id %>" title="View Post"><span><%= data[index].posts[index1].title %></span></a></h5>
+                        <h6 style="text-align: center">Category: <%= data[index].posts[index1]._id %></h6>
 
-                  </div>
-                  <% }) %>
+                      </div>
+                  <% } %>
+                  <% } %>
                   <!-- <div style="width: 300px; float:left; margin:10px">
                     <img src="/img/items/bag1.jfif" alt=""><br>
                     <br>
