@@ -7,7 +7,7 @@ var employeeSchema = new mongoose.Schema({
 
     name : String,
     email : String,
-    etype : String,
+    category: String
 }); 
 
 var employeeModel = mongoose.model('Employee',employeeSchema);
