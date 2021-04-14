@@ -6,18 +6,18 @@
 <br>
 <script>
     document.getElementById("order-button1").onclick = function(e) {
-        var url = "/api/payment/order"
+        var url = "/api/payment/order";
         var params = {
             amount: document.getElementById("order-amt").value,
             currency: "INR",
-            receipt: "wthcoding001",
+            receipt: "thelostbox",
             payment_capture: '1'
         };
-        var xmlHttp = new XMLHttpRequest();
+        var xmlHttp = new XMLHttpRequest(); 
         xmlHttp.onreadystatechange = function(res) {
             if (xmlHttp.readyState === 4) {
                 res = JSON.parse(xmlHttp.responseText);
-                document.getElementById("rzp-text").value = res.sub.id
+                document.getElementById("rzp-text").value = res.sub.id;
             }
         }
         xmlHttp.open("POST", url, true);
@@ -38,8 +38,8 @@
         var options = {
             "key": "<%= key %>",
             "currency": "INR",
-            "name": "WTH Coding",
-            "description": "WtH Coding Transaction",
+            "name": "TheLostBox",
+            "description": "Lost Box Transaction",
             "order_id": document.getElementById("rzp-text").value,
             "handler": function(response) {
                 document.getElementById('order-pay-id').value = response.razorpay_payment_id;

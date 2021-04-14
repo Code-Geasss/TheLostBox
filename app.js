@@ -16,8 +16,7 @@ const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
 const cors = require('cors');
 const passport = require('passport');
-const crypto = require("crypto");
-const Razorpay = require("razorpay");
+
 
 var methodOverride = require("method-override");
 
@@ -25,10 +24,6 @@ const flash = require('connect-flash');
 const dotenv = require('dotenv');
 dotenv.config();
 
-const instance = new Razorpay({
-    key_id : process.env.KEY_ID,
-    key_secret : process.env.KEY_SECRET
-});
 
 
 require('./config/passport');
@@ -51,6 +46,7 @@ const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const chatRoutes = require('./routes/chat');
 const employeeRoutes = require('./routes/employee');
+const paymentRoutes = require('./routes/payment');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -69,37 +65,7 @@ app.use(express.static(path.join(__dirname, 'assets')));
 const Socket = require('./models/socket');
 const Chat = require('./models/chat');
 
-app.get("/payments",(req,res)=>{
-    res.render("payment",{key: process.env.KEY_ID});
-});
 
-app.post("/api/payment/order",(req,res)=>{
-
-    params = req.body;
-    instance.orders
-        .create(params)
-        .then((data)=>{
-            res.send({sub:data, status:"success"});
-        })
-        .catch((error)=>{
-            res.send({sub:error,status:"failed"});
-        });
-});
-
-app.post("/api/payment/verify",(req,res)=>{
-    body = req.body.razorpay_order_id + "|" + req.body.razorpay_payment_id;
-
-    var expectedSignature = crypto
-        .createHmac("sha256",process.env.KEY_SECRET)
-        .update(body.toString())
-        .digest("hex");
-    console.log("sig" + req.body.razorpay_signature);
-    console.log("sig" + expectedSignature);
-    var response = {status : "failure"};
-    if(expectedSignature === req.body.razorpay_signature)
-        response = {status : "success"};
-    res.send(response);
-});
 
 io.on('connection', async (socket) => {
     console.log('CLIENT CONNECTED')
@@ -217,6 +183,7 @@ app.use(postRoutes);
 app.use(chatRoutes);
 app.use(userRoutes);
 app.use(employeeRoutes);
+app.use(paymentRoutes);
 
 
 
