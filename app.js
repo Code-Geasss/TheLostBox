@@ -26,7 +26,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const instance = new Razorpay({
-    key_id : process.env.KEY_ID;
+    key_id : process.env.KEY_ID,
     key_secret : process.env.KEY_SECRET
 });
 
@@ -84,6 +84,21 @@ app.post("/api/payment/order",(req,res)=>{
         .catch((error)=>{
             res.send({sub:error,status:"failed"});
         });
+});
+
+app.post("/api/payment/verify",(req,res)=>{
+    body = req.body.razorpay_order_id + "|" + req.body.razorpay_payment_id;
+
+    var expectedSignature = crypto
+        .createHmac("sha256",process.env.KEY_SECRET)
+        .update(body.toString())
+        .digest("hex");
+    console.log("sig" + req.body.razorpay_signature);
+    console.log("sig" + expectedSignature);
+    var response = {status : "failure"};
+    if(expectedSignature === req.body.razorpay_signature)
+        response = {status : "success"};
+    res.send(response);
 });
 
 io.on('connection', async (socket) => {
