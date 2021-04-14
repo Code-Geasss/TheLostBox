@@ -1,58 +1,53 @@
-<label for=""> Amount: </label>
+<label for="">Amount: </label>
 <input type="text" id="order-amt">
 <br>
-
-<!--Get order id from razorpay-->
+<!-- Get order id from razorpay -->
 <button id="order-button1">Create Order</button>
 <br>
-
 <script>
-
-    document.getElementById("order-button1").onclick = function(e){
-        var url = "/api/payment/order";
+    document.getElementById("order-button1").onclick = function(e) {
+        var url = "/api/payment/order"
         var params = {
-            amount : document.getElementById("order-amt").value,
-            currency : "INR",
-            receipt: "thelostbox",
-            payment_capture: "1"
+            amount: document.getElementById("order-amt").value,
+            currency: "INR",
+            receipt: "wthcoding001",
+            payment_capture: '1'
         };
         var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function(res){
-            if(xmlHttp.readyState === 4){
+        xmlHttp.onreadystatechange = function(res) {
+            if (xmlHttp.readyState === 4) {
                 res = JSON.parse(xmlHttp.responseText);
                 document.getElementById("rzp-text").value = res.sub.id
             }
         }
-        xmlHttp.open("POST",url,true);
-        xmlHttp.setRequestHeader("Content-type","application/json");
-        xmlHttp.send(JSON.stringify(params)); 
+        xmlHttp.open("POST", url, true);
+        xmlHttp.setRequestHeader("Content-type", "application/json");
+        xmlHttp.send(JSON.stringify(params));
     }
 </script>
 <br>
 <hr>
-<label for="">Order id:</label>
+<label for="">Order id: </label>
 <input type="text" name="" id="rzp-text">
 <br>
 <button id="rzp-button1">Checkout</button>
 <div id="paymentDetails"></div>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
-    document.getElementById("rzp-button1").onclick = function(e){
-
+    document.getElementById("rzp-button1").onclick = function(e) {
         var options = {
             "key": "<%= key %>",
             "currency": "INR",
-            "name": "TheLostBox",
-            "description" : "Lost and Found Transaction",
-            "order_id" : document.getElementById("rzp-test").value,
-            "handler" : function(response){
-
-                document.getElementById("order-pay-id").value=response.razorpay_payment_id;
-                document.getElementById("order-id").value = response.razorpay_order_id;
-                document.getElementById("order-sig").value = response.razorpay_signature;
+            "name": "WTH Coding",
+            "description": "WtH Coding Transaction",
+            "order_id": document.getElementById("rzp-text").value,
+            "handler": function(response) {
+                document.getElementById('order-pay-id').value = response.razorpay_payment_id;
+                document.getElementById('order-id').value = response.razorpay_order_id;
+                document.getElementById('order-sig').value = response.razorpay_signature;
             },
-            "theme" : {
-                "color" : "#0EB9F2"
+            "theme": {
+                "color": "#0EB9F2"
             }
         };
         var rzp1 = new Razorpay(options);
@@ -62,30 +57,30 @@
 </script>
 <br>
 <hr>
-<label for="">Order id:</label>
+<label for="">Order id :</label>
 <input type="text" id="order-id">
-<label for="">Payment id:</label>
+<label for="">Payment id :</label>
 <input type="text" id="order-pay-id">
-<label for="">Order Signature:</label>
+<label for="">Order signature :</label>
 <input type="text" id="order-sig">
 <br>
 <button id="verify-button1">Verify </button>
 <script>
-    document.getElementById('verify-button1').onclick = function(e){
-        var url = 'api/payment/verify';
+    document.getElementById('verify-button1').onclick = function(e) {
+        var url = '/api/payment/verify';
         var params = {
-            razorpay_order_id : document.getElementById('order-id').value,
-            razorpay_payment_id : document.getElementById('order-pay-id').value,
-            razorpay_signature : document.getElementById('order-sig').value
+            razorpay_order_id: document.getElementById('order-id').value,
+            razorpay_payment_id: document.getElementById('order-pay-id').value,
+            razorpay_signature: document.getElementById('order-sig').value
         };
         var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function(res){
-            if(xmlHttp.readyState === 4){
+        xmlHttp.onreadystatechange = function(res) {
+            if (xmlHttp.readyState === 4) {
                 alert(xmlHttp.responseText);
             }
         }
-        xmlHttp.open("POST",url,true);
-        xmlHttp.setRequestHeader("Content-type","application/json");
+        xmlHttp.open("POST", url, true); // false for synchronous request
+        xmlHttp.setRequestHeader("Content-type", "application/json");
         xmlHttp.send(JSON.stringify(params));
     }
 </script>
