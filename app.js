@@ -16,11 +16,20 @@ const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
 const cors = require('cors');
 const passport = require('passport');
+const crypto = require("crypto");
+const Razorpay = require("razorpay");
+
 var methodOverride = require("method-override");
 
 const flash = require('connect-flash');
 const dotenv = require('dotenv');
 dotenv.config();
+
+const instance = new Razorpay({
+    key_id : process.env.KEY_ID;
+    key_secret : process.env.KEY_SECRET
+});
+
 
 require('./config/passport');
 
@@ -47,6 +56,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(morgan('dev'));
+app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -59,6 +69,22 @@ app.use(express.static(path.join(__dirname, 'assets')));
 const Socket = require('./models/socket');
 const Chat = require('./models/chat');
 
+app.get("/payments",(req,res)=>{
+    res.render("payment",{key: process.env.KEY_ID});
+});
+
+app.post("/api/payment/order",(req,res)=>{
+
+    params = req.body;
+    instance.orders
+        .create(params)
+        .then((data)=>{
+            res.send({sub:data, status:"success"});
+        })
+        .catch((error)=>{
+            res.send({sub:error,status:"failed"});
+        });
+});
 
 io.on('connection', async (socket) => {
     console.log('CLIENT CONNECTED')
