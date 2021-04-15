@@ -209,14 +209,20 @@ router.delete('/post/:id',isAuthenticated,function(req,res){
 
 router.get('/box/:id',isAuthenticated,function(req,res){
     var postid=req.params.id;
-    console.log(postid);
+    //console.log(postid);
     
-    Post.find({ "posts._id" : postid},{posts:{ $elemMatch:{_id:postid}}},function(err,result){
-        if(err) console.log(err);
-        else{
-        var data = result[0];
-        console.log(data);       
-        res.render("item", {data: data});
+    Post.find({ "posts._id" : postid},{posts:{ $elemMatch:{_id:postid}}})
+    .populate('posts.postedBy')
+    .exec(function(err,result){
+        if(err){
+            console.log(err);
+        }
+        else
+        {
+            console.log(result);
+            var data = result[0]; 
+            console.log(data.posts[0].postedBy); 
+            res.render("item", {data: data});
         }
     });
 });

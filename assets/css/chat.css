@@ -3,7 +3,7 @@
 }
 #container{
 	width:750px;
-	height:800px;
+	height:600px;
 	background:#eff3f7;
 	margin:0 auto;
     margin-top: 100px;
@@ -138,7 +138,7 @@ main header h3{
 	margin:0;
 	list-style-type:none;
 	overflow-y:scroll;
-	height:535px;
+	height:300px;
 	border-top:2px solid #fff;
 	border-bottom:2px solid #fff;
 }
