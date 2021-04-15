@@ -1,6 +1,7 @@
 const express = require('express');
 const http = require("http");
 const app = express();
+const request = require('request');
 
 const server =http.createServer(app);
 const io = require("socket.io").listen(server);
@@ -47,6 +48,7 @@ const userRoutes = require('./routes/user');
 const chatRoutes = require('./routes/chat');
 const employeeRoutes = require('./routes/lost');
 const paymentRoutes = require('./routes/payment');
+const costRoutes = require('./routes/cost');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -183,6 +185,7 @@ app.use(chatRoutes);
 app.use(userRoutes);
 app.use(employeeRoutes);
 app.use(paymentRoutes);
+app.use(costRoutes);
 
 
 
