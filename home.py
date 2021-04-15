@@ -2,8 +2,9 @@ from flask import Flask
 
 app = Flask(__name__)
 
-@app.route('/home', methods=['GET'])
-def index():
+@app.route('/home/<title>', methods=['GET'])
+def index(title):
+    print(title)
     return "Flask server"
 
 if __name__ == "__main__":
