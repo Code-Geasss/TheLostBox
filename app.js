@@ -45,7 +45,7 @@ const postRoutes = require('./routes/post');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const chatRoutes = require('./routes/chat');
-const employeeRoutes = require('./routes/employee');
+const employeeRoutes = require('./routes/lost');
 const paymentRoutes = require('./routes/payment');
 
 app.set('views', path.join(__dirname, 'views'));
@@ -138,7 +138,6 @@ io.on('connection', async (socket) => {
                         console.log("--------------------------------");
                     }
                 })
-                // const allChats = await Chat.find({ $or: [{ 'receiver._id': receiverId, 'sender._id': senderId },{ 'sender._id': receiverId, 'receiver._id': senderId }] })
                 console.log("emitting offline")
                 //console.log(newChat);
                 socket.emit('message', newChat);

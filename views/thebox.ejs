@@ -157,15 +157,15 @@
                   <br>
                   <br>
                   <% for (index in data) { %>
-                    <% for (index1 in data[index].posts) { %>
+                    
                       <div style="width: 300px; float:left; margin:10px">
-                        <img src='<%= data[index].posts[index1].photo %>' alt=""><br>
+                        <img src='<%= data[index].posts.photo %>' alt=""><br>
                         <br>
-                        <h5 style="text-align: center"><a href="/box/<%= data[index].posts[index1]._id %>" title="View Post"><span><%= data[index].posts[index1].title %></span></a></h5>
-                        <h6 style="text-align: center">Category: <%= data[index].posts[index1]._id %></h6>
+                        <h5 style="text-align: center"><a href="/box/<%= data[index].posts._id %>" title="View Post"><span><%= data[index].posts.title %></span></a></h5>
+                        <h6 style="text-align: center">Category: <%= data[index].posts._id %></h6>
 
                       </div>
-                  <% } %>
+                  
                   <% } %>
                   <!-- <div style="width: 300px; float:left; margin:10px">
                     <img src="/img/items/bag1.jfif" alt=""><br>

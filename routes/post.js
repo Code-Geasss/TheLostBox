@@ -46,6 +46,10 @@ router.post("/post/create",unauthorised,multer({ storage: storage }).single("pho
     var description=req.body.description;
     var category=req.body.category;
     var location=req.body.location;
+    var datetime=req.body.datetime;
+    var color=req.body.color;
+    var brand = req.body.brand;
+    //console.log(req.body);
 
     var  newPost = new Post(
         {
@@ -55,6 +59,9 @@ router.post("/post/create",unauthorised,multer({ storage: storage }).single("pho
                 category:category,
                 description:description,
                 location:location,
+                datetime:datetime,
+                color:color,
+                brandname:brand,
                 photo:path2,
                 postedBy:req.user._id,
             }]         
@@ -64,11 +71,15 @@ router.post("/post/create",unauthorised,multer({ storage: storage }).single("pho
         category:category,
         description:description,
         location:location,
+        datetime:datetime,
+        color:color,
+        brandname:brand,
         photo:path2,
         postedBy:req.user._id,
     }];
 
-    if(title.length == 0 || description.length == 0 || category.length == 0 || location.length == 0){
+    if(title.length == 0 || description.length == 0 || category.length == 0 || location.length == 0 ||
+        datetime.length == 0 || color.length == 0 || brand.length == 0){
             console.log("err ke andar");
             req.flash('error', 'Please fill all the fields'); 
             res.redirect("/post/create");
@@ -118,29 +129,26 @@ router.put('/post/:name/:id',unauthorised,multer({ storage: storage }).single("p
         var description=req.body.description;
         var category=req.params.name;
         var location=req.body.location;
+        var datetime=req.body.datetime;
+        var color=req.body.color;
+        var brand = req.body.brand;
 
-        if(title.length == 0 || description.length == 0 || category.length == 0 || location.length == 0){
+        if(title.length == 0 || description.length == 0 || category.length == 0 || location.length == 0
+            || datetime.length == 0|| color.length == 0 || brand.length == 0){
                 console.log("err ke andar");
                 req.flash('error', 'Please fill all the fields'); 
                 res.redirect("/post/${req.params.name}/${req.params.id}/edit");
         }
         else{
-            var updatedpost =[{
-                title:title,
-                category:category,
-                description:description,
-                location:location,
-                postedBy:path2,
-                postedBy:req.user._id,
-                updated:Date.now(),
-            }];
-            console.log(updatedpost);
             Post.findOneAndUpdate({ "posts._id": postId },{$set:{ 
-                'posts.$.title': title,
-                'posts.$.category': category,
+                'posts.$.title': title.toLowerCase(),
+                'posts.$.category': category.toLowerCase(),
                 'posts.$.description': description,
                 'posts.$.location': location,
                 'posts.$.photo': path2,
+                'posts.$.brandname': brand,
+                'posts.$.color': color,
+                'posts.$.datetime': datetime,
                 'posts.$.postedBy': req.user._id,
                 'posts.$.updated': Date.now(),
              }},
@@ -167,7 +175,7 @@ router.get('/post/create',isAuthenticated,function(req,res){
 router.get('/post/:name/:id/edit',isAuthenticated,function(req,res){
     var errMsg = req.flash('error')[0];
     var postId = req.params.id;
-    console.log("1");
+    //console.log("1");
     Post.find({ "posts._id" : postId},{posts:{ $elemMatch:{_id:postId}}},function(err,result){
         if(err)
         {

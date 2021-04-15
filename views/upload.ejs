@@ -58,6 +58,8 @@
   <!-- Vendor CSS Files -->
   <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+  <link rel='stylesheet' href='https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css'>
   <link href="/vendor/aos/aos.css" rel="stylesheet">
   <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
@@ -118,19 +120,19 @@
             <label for="fname">Title</label>
             <input type="text" id="fname" name="title" placeholder="Title.."><br>
         
-            <!-- <label for="lname">Last Name</label>
-            <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+            <label for="color">Color</label>
+            <input type="text" id="color" name="color" placeholder="Color..">
             <br>
-            <label for="itemtype">Item Type</label>
-            <input type="text" id="itemtype" name="itemtype" placeholder="Type of item found">
-            <br> -->
+            <label for="brand">Brand name</label>
+            <input type="text" id="brand" name="brand" placeholder="Brand Name">
+            <br>
             <label for="location">Location</label>
             <input type="text" id="location" name="location" placeholder="Location of item found">
             <br>
             <label for="size">Category</label>
             <select id="size" name="category">
                 <option value="electronics">ELECTRONICS</option>
-                <option value="Wallets">WALLETS</option>
+                <option value="wallets">WALLETS</option>
                 <option value="cards">CARDS</option>
                 <option value="others">OTHER PRODUCTS</option>
             </select><br>
@@ -138,6 +140,14 @@
             <label for="description">Description</label>
             <textarea id="description" name="description" placeholder="Describe the item.." style="height:200px"></textarea>
             <br>
+            <div class="form-group">
+              <div class='input-group date' id='datetimepicker1' style="width: 500px;">
+                <input type='text' class="form-control" name="datetime" placeholder="Select Date and Time" >
+                <span class="input-group-addon">
+                              <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
+            </div>
             <br>
             <div class="center">
                 <div class="upload-btn-wrapper">
@@ -153,6 +163,15 @@
           </form>
     </div>
 
-
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js'></script>
+    <script src='https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/src/js/bootstrap-datetimepicker.js'></script>
+    <script>
+      $(function () {
+        $('#datetimepicker1').datetimepicker({
+          format: 'DD-MM-YYYY LT'
+        });
+	    });
+    </script>
     </body>
 </html>

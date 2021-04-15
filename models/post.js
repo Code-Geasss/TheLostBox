@@ -10,7 +10,7 @@ const postSchema = new mongoose.Schema({
     posts:[{
         title: {
             type: String,
-            required: true
+            required: true,
         },
         description: {
             type: String,
@@ -23,6 +23,14 @@ const postSchema = new mongoose.Schema({
         photo: {
             type:String
         },
+        color:{
+            type:String,
+            required:true,        
+        },
+        brandname:{
+            type:String,
+            required:true,
+        },
         category: {
             type: String,
             required: true
@@ -30,6 +38,9 @@ const postSchema = new mongoose.Schema({
         postedBy: {
             type: ObjectId,
             ref: "User"
+        },
+        datetime:{
+            type:String,
         },
         created: {
             type: Date,
