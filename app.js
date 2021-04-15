@@ -16,11 +16,15 @@ const cookieParser = require('cookie-parser');
 const expressValidator = require('express-validator');
 const cors = require('cors');
 const passport = require('passport');
+
+
 var methodOverride = require("method-override");
 
 const flash = require('connect-flash');
 const dotenv = require('dotenv');
 dotenv.config();
+
+
 
 require('./config/passport');
 
@@ -42,11 +46,13 @@ const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const chatRoutes = require('./routes/chat');
 const employeeRoutes = require('./routes/employee');
+const paymentRoutes = require('./routes/payment');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.use(morgan('dev'));
+app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -58,6 +64,7 @@ app.use(express.static(path.join(__dirname, 'assets')));
 
 const Socket = require('./models/socket');
 const Chat = require('./models/chat');
+
 
 
 io.on('connection', async (socket) => {
@@ -176,6 +183,7 @@ app.use(postRoutes);
 app.use(chatRoutes);
 app.use(userRoutes);
 app.use(employeeRoutes);
+app.use(paymentRoutes);
 
 
 
