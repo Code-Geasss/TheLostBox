@@ -48,7 +48,7 @@ const userRoutes = require('./routes/user');
 const chatRoutes = require('./routes/chat');
 const employeeRoutes = require('./routes/lost');
 const paymentRoutes = require('./routes/payment');
-const costRoutes = require('./routes/cost');
+const priceRoutes = require('./routes/price');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -185,7 +185,7 @@ app.use(chatRoutes);
 app.use(userRoutes);
 app.use(employeeRoutes);
 app.use(paymentRoutes);
-app.use(costRoutes);
+app.use(priceRoutes);
 
 
 
