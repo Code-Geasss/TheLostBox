@@ -35,27 +35,22 @@ filename: (req, file, cb) => {
 
 router.get('/profile',isAuthenticated,function(req,res){
     var currentUser= req.user;
-    res.render('');
+    res.render('profile',{currentUser:currentUser});
 });
 
-router.post('/upload',unauthorised,multer({ storage: storage }).single("photo"),(req, res, next) => {
+
+router.post('/save', unauthorised,multer({ storage: storage }).single("photo"),(req, res, next) => {
+    console.log(req.body);
+    var name = req.body.fullname;
+    var about = req.body.about;
     data=path.join('/images/' + req.file.filename);
     var path2 = data.replace(/\\/g, '/');
-    User.findOneAndUpdate({'email':req.user.email},{'profile_image':path2},{new:true},function(err,result){
+    console.log(path2);
+    
+    User.findOneAndUpdate({email:req.user.email},{fullname:name,about:about,profile_image:path2},function(err,result){
         if(err) console.log(err);
         res.redirect('/profile');
     });
-});
-
-router.post('/save', unauthorised,function(req,res)
-{
-    var name = req.body.fullname;
-    var about = req.body.about;
-    console.log(req.body);
-    User.findOneAndUpdate({email:req.user.email},{fullname:name,about:about},function(err,result){
-        if(err) console.log(err);
-        res.redirect('/profile');
-    })
 });
 
 module.exports=router;
