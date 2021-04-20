@@ -9,10 +9,10 @@ var nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const Razorpay = require("razorpay");
 
-const instance = new Razorpay({
-    key_id : process.env.KEY_ID,
-    key_secret : process.env.KEY_SECRET
-});
+// const instance = new Razorpay({
+//     key_id : process.env.KEY_ID,
+//     key_secret : process.env.KEY_SECRET
+// });
 
 
 router.get("/payments",(req,res)=>{
