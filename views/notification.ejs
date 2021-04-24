@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>New Notification</title>
+</head>
+<body>
+    
+
+    
+    <% for (index in result) { %>
+           
+            <% if (currentUser._id == result[index].senderId) {%>
+            <h3 >See the form : Ur request is sent</h3> 
+            <%} else { %>
+                <input type="text" id="order-amt">
+          <% } %>
+    
+    <% } %>
+
+</body>
+</html>
