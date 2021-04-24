@@ -9,14 +9,24 @@
 </head>
 <body>
     
-
-    
     <% for (index in result) { %>
            
             <% if (currentUser._id == result[index].senderId) {%>
-            <h3 >See the form : Ur request is sent</h3> 
+                <% if (result[index].isAccept === 1) {%>
+                    
+                    <a href="/box/<%= result[index].id %>"><h3>View ur lost prodcut</h3></a>
+                <% } else if (result[index].isAccept === 0){%>
+                    <h2>Ur Request has been sent</h2>
+                <% } else { %>
+                    <h2>Sorry ur Product was not found by <%= result[index].receiverID.fullname %></h2>
+                <% } %>
             <%} else { %>
-                <input type="text" id="order-amt">
+                <% if (result[index].isAccept == 0) { %>
+                    <a href="/accept/<%= result[index]._id %>"><button class="button">Accept</button></a>
+                    <a href="/reject/<%= result[index]._id %>"><button class="button">Reject</button></a>
+                    <br>
+                <% } %>
+
           <% } %>
     
     <% } %>

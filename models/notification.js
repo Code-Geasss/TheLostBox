@@ -12,15 +12,15 @@ const notificationSchema = new mongoose.Schema({
         required : true
     },
     receiverID : {
-        type : String,
-        required : true
+        type : ObjectId,
+        ref : "User",
     },
     brandName : {
         type : String,
         required : true
     },
     isAccept : {
-        type : Boolean,
+        type : Number,
         required : true
     }
 },   
