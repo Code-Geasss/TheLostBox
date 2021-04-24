@@ -111,16 +111,19 @@
 
 
             <label for="objname">Brand Name</label>
-            <input type="text" id="objname" name="title" placeholder="Brand Name.."><br>
+            <input type="text" id="objname" name="bname" placeholder="Brand Name.."><br>
         
             <label for="objcolor">Color</label>
-            <input type="text" id="objcolor" name="objcolor" placeholder="Object Color..">
+            <input type="text" id="objcolor" name="color" placeholder="Object Color..">
             <br>
-            <label for="brand">Brand name</label>
-            <input type="text" id="brand" name="brand" placeholder="Brand Name">
+            <label for="size">Category</label>
+            <select id="size" name="category">
+                <option value="electronics">ELECTRONICS</option>
+                <option value="wallets">WALLETS</option>
+                <option value="cards">CARDS</option>
+                <option value="others">OTHER PRODUCTS</option>
+            </select><br>
             <br>
-            <label for="objcategory">Category</label>
-            <input type="text" id="objcategory" name="objcategory" placeholder="Category of the item found..">
             <br>
             <input type="submit" value="Submit">
                         <!-- <div id="signupalert" style="display:none" class="alert alert-danger">
