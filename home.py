@@ -5,7 +5,7 @@ import requests
 import csv
 app = Flask(__name__)
 
-@app.route('/home/<title>', methods=['GET'])
+@app.route('/home/<title>/', methods=['GET'])
 def index(title):
     print(title)
 

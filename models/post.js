@@ -35,6 +35,9 @@ const postSchema = new mongoose.Schema({
             type: String,
             required: true
         },
+        cost : {
+            type : Number,
+        },
         postedBy: {
             type: ObjectId,
             ref: "User"

@@ -164,14 +164,15 @@
                 <div style="width: 400px; height :500px ;float:left;  margin:10px">
                     <h1><%= data.posts[0].title %></h1>
                     <br>
-                    <h6><b>Location:</b> <%= data.posts[0].title %></h6><br>
-                    <h6><b>Description:</b> <%= data.posts[0].description></h6><br>
+                    <h6><b>Location:</b> <%= data.posts[0].location %></h6><br>
+                    <h6><b>Description:</b> <%= data.posts[0].description %></h6><br>
                     <h6><b>Person to Contact:</b>  <%= data.posts[0].postedBy.fullname %></h6><br>
                     <h6><b>Email:</b><a href="mailto:<%= data.posts[0].postedBy.email %>"> <%= data.posts[0].postedBy.email %></a> </h6><br><br>
-                    <h6><b>Color:</b> Blue </h6><br>
+                    <h6><b>Color:</b> <%= data.posts[0].color %> </h6><br>
                     <h6><b>Category:</b> <%= data.posts[0].category %> </h6><br>
-                    <a href="/price/:<%= data.posts[0].description %>"><input type="submit" value="Get Estimated Price" id="order-button1"></a>
-                    <a href="/>"><input type="submit" value="Proceed to Buy" id="order-button1"></a>
+                    
+                    <a href="/price/<%= data.posts[0].description %>/<%= data.posts[0]._id %>"><input type="submit" value="Get Estimated Price" id="order-button1"></a>
+                    <a href="/payments/<%= data.posts[0].postedBy %>/<%= data.posts[0]._id %>"><input type="submit" value="Proceed to Buy" id="order-button1"></a>
                     <a href="/>"><input type="submit" value="Chat" id="order-button1"></a>
                     
   

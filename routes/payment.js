@@ -9,6 +9,7 @@ var nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const Razorpay = require("razorpay");
 var User = require('../models/user');
+const Post = require('../models/post');
 
 const instance = new Razorpay({
     key_id : process.env.KEY_ID,
@@ -16,9 +17,22 @@ const instance = new Razorpay({
 });
 
 
-router.get("/payments/:id",(req,res)=>{
+router.get("/payments/:id/:id2",(req,res)=>{
     var rid= req.params.id;
-    res.render("payment",{key: process.env.KEY_ID,rid:rid});
+    var postId = req.params.id2;
+
+    Post.findOne({"posts._id": postId},{posts:{ $elemMatch:{_id:postId}}},function(err,result){
+           if(err){
+               console.log(err);
+           }
+           else{
+               console.log(result.posts[0].cost);
+               var payAmount = result.posts[0].cost;
+                res.render("payment",{key: process.env.KEY_ID,rid:rid,payAmount:payAmount});
+               
+           }
+       });    
+
 });
 
 router.post("/api/payment/order",(req,res)=>{
