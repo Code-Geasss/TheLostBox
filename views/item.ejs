@@ -30,7 +30,17 @@
   <link href="/css/thebox.css" rel="stylesheet">
 
   
-
+  <style>
+    input[type=submit] {
+          background-color: #283adb;
+          color: white;
+          padding: 12px 20px;
+          border: none;
+          margin-top: 10px;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+  </style>
 </head>
 <body>
 
@@ -155,14 +165,18 @@
                     <h1><%= data.posts[0].title %></h1>
                     <br>
                     <h6><b>Location:</b> <%= data.posts[0].title %></h6><br>
-                    <h6><b>Description:</b> <%= data.posts[0].title %></h6><br>
+                    <h6><b>Description:</b> <%= data.posts[0].description></h6><br>
                     <h6><b>Person to Contact:</b>  <%= data.posts[0].postedBy.fullname %></h6><br>
                     <h6><b>Email:</b><a href="mailto:<%= data.posts[0].postedBy.email %>"> <%= data.posts[0].postedBy.email %></a> </h6><br><br>
                     <h6><b>Color:</b> Blue </h6><br>
                     <h6><b>Category:</b> <%= data.posts[0].category %> </h6><br>
+                    <a href="/price/:<%= data.posts[0].description %>"><input type="submit" value="Get Estimated Price" id="order-button1"></a>
+                    <a href="/>"><input type="submit" value="Proceed to Buy" id="order-button1"></a>
+                    <a href="/>"><input type="submit" value="Chat" id="order-button1"></a>
                     
   
                 </div>
+
         </div>
         </div>
        

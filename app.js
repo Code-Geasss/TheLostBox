@@ -40,8 +40,6 @@ mongoose.connection.on('error', err => {
 });
 
 
-
-
 const postRoutes = require('./routes/post');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
