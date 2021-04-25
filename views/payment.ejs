@@ -1,86 +1,234 @@
-<label for="">Amount: </label>
-<input type="text" id="order-amt">
-<br>
-<!-- Get order id from razorpay -->
-<button id="order-button1">Create Order</button>
-<br>
-<script>
-    document.getElementById("order-button1").onclick = function(e) {
-        var url = "/api/payment/order";
-        var params = {
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+        body {font-family: Arial, Helvetica, sans-serif;}
+        * {box-sizing: border-box;}
+        
+        input[type=text], select, textarea {
+          width: 100%;
+          padding: 12px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+          margin-top: 6px;
+          margin-bottom: 16px;
+          resize: vertical;
+        }
+        
+        input[type=submit] {
+          background-color: #283adb;
+          color: white;
+          padding: 12px 20px;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        
+        input[type=submit]:hover {
+          background-color: #4727da;
+        }
+        
+        .container {
+            margin-top: 40px;
+            padding-top: 60px;
+          border-radius: 5px;
+          background-color: #f2f2f2;
+          padding: 20px;
+        }
+        </style>
+
+
+
+
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>The Box</title>
+    <meta content="" name="description" />
+
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link href="/img/favicon.png" rel="icon" />
+    <link href="/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" />
+    <link href="/vendor/aos/aos.css" rel="stylesheet" />
+    <link href="/vendor/remixicon/remixicon.css" rel="stylesheet" />
+    <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet" />
+    <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" />
+
+    <link href="/css/style.css" rel="stylesheet" />
+    
+  </head>
+  <body>
+    <!-- header -->
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top">
+      <div
+        class="container-fluid container-xl d-flex align-items-center justify-content-between"
+      >
+        <a href="/" class="logo d-flex align-items-center">
+          <img src="/img/logo.png" alt="" />
+          <span>The LostBox</span>
+        </a>
+
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li><a class="nav-link scrollto active" href="/">Home</a></li>
+            <li><a class="nav-link scrollto" href="#about">About</a></li>
+            <li><a class="nav-link scrollto" href="/box">The Box</a></li>
+            <li><a class="nav-link scrollto" href="#team">Team</a></li>
+
+            <li class="dropdown">
+              <a href="#"
+                ><span>Drop Down</span> <i class="bi bi-chevron-down"></i
+              ></a>
+              <ul>
+                <li><a href="#">Drop Down 1</a></li>
+                <li class="dropdown">
+                  <a href="#"
+                    ><span>Deep Drop Down</span>
+                    <i class="bi bi-chevron-right"></i
+                  ></a>
+                  <ul>
+                    <li><a href="#">Deep Drop Down 1</a></li>
+                    <li><a href="#">Deep Drop Down 2</a></li>
+                    <li><a href="#">Deep Drop Down 3</a></li>
+                    <li><a href="#">Deep Drop Down 4</a></li>
+                    <li><a href="#">Deep Drop Down 5</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">Drop Down 2</a></li>
+                <li><a href="#">Drop Down 3</a></li>
+                <li><a href="#">Drop Down 4</a></li>
+              </ul>
+            </li>
+            <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+            <li><a class="nav-link scrollto" href="/LogIn">Login</a></li>
+            <li><a class="nav-link scrollto" href="/Signup">Sign-Up</a></li>
+            <li>
+              <a class="getstarted scrollto" href="#about">Get Started</a>
+            </li>
+          </ul>
+          <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+        <!-- .navbar -->
+      </div>
+    </header>
+    <!-- End Header -->
+
+    <br />
+    <br />
+    <br />
+    
+    <div class="container">
+      <label for="">Amount: </label>
+      <input type="text" id="order-amt" />
+      <br />
+      <!-- Get order id from razorpay -->
+      <input type="submit" value="Create Order" id="order-button1">
+      <!-- <button id="order-button1">Create Order</button> -->
+      <br />
+
+      <br />
+      <hr />
+      <label for="">Order id: </label>
+      <input type="text" name="" id="rzp-text" />
+      <br />
+      <input type="submit" value="Checkout" id="rzp-button1">
+      <!-- <button id="rzp-button1">Checkout</button> -->
+      <div id="paymentDetails"></div>
+
+      <br />
+      <hr />
+      <label for="">Order id :</label>
+      <input type="text" id="order-id" />
+      <label for="">Payment id :</label>
+      <input type="text" id="order-pay-id" />
+      <label for="">Order signature :</label>
+      <input type="text" id="order-sig" />
+      <br />
+      <input type="submit" value="Verify" id="verify-button1">
+      <!-- <button id="verify-button1">Verify</button> -->
+
+      <script>
+        document.getElementById("order-button1").onclick = function (e) {
+          var url = "/api/payment/order";
+          var params = {
             amount: document.getElementById("order-amt").value,
             currency: "INR",
             receipt: "thelostbox",
-            payment_capture: '1'
-        };
-        var xmlHttp = new XMLHttpRequest(); 
-        xmlHttp.onreadystatechange = function(res) {
+            payment_capture: "1",
+          };
+          var xmlHttp = new XMLHttpRequest();
+          xmlHttp.onreadystatechange = function (res) {
             if (xmlHttp.readyState === 4) {
-                res = JSON.parse(xmlHttp.responseText);
-                document.getElementById("rzp-text").value = res.sub.id;
+              res = JSON.parse(xmlHttp.responseText);
+              document.getElementById("rzp-text").value = res.sub.id;
             }
-        }
-        xmlHttp.open("POST", url, true);
-        xmlHttp.setRequestHeader("Content-type", "application/json");
-        xmlHttp.send(JSON.stringify(params));
-    }
-</script>
-<br>
-<hr>
-<label for="">Order id: </label>
-<input type="text" name="" id="rzp-text">
-<br>
-<button id="rzp-button1">Checkout</button>
-<div id="paymentDetails"></div>
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script>
-    document.getElementById("rzp-button1").onclick = function(e) {
-        var options = {
-            "key": "<%= key %>",
-            "currency": "INR",
-            "name": "TheLostBox",
-            "description": "Lost Box Transaction",
-            "order_id": document.getElementById("rzp-text").value,
-            "handler": function(response) {
-                document.getElementById('order-pay-id').value = response.razorpay_payment_id;
-                document.getElementById('order-id').value = response.razorpay_order_id;
-                document.getElementById('order-sig').value = response.razorpay_signature;
+          };
+          xmlHttp.open("POST", url, true);
+          xmlHttp.setRequestHeader("Content-type", "application/json");
+          xmlHttp.send(JSON.stringify(params));
+        };
+      </script>
+
+      <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+      <script>
+        document.getElementById("rzp-button1").onclick = function (e) {
+          var options = {
+            key: "<%= key %>",
+            currency: "INR",
+            name: "TheLostBox",
+            description: "Lost Box Transaction",
+            order_id: document.getElementById("rzp-text").value,
+            handler: function (response) {
+              document.getElementById("order-pay-id").value =
+                response.razorpay_payment_id;
+              document.getElementById("order-id").value =
+                response.razorpay_order_id;
+              document.getElementById("order-sig").value =
+                response.razorpay_signature;
             },
-            "theme": {
-                "color": "#0EB9F2"
-            }
+            theme: {
+              color: "#0EB9F2",
+            },
+          };
+          var rzp1 = new Razorpay(options);
+          rzp1.open();
+          e.preventDefault();
         };
-        var rzp1 = new Razorpay(options);
-        rzp1.open();
-        e.preventDefault();
-    }
-</script>
-<br>
-<hr>
-<label for="">Order id :</label>
-<input type="text" id="order-id">
-<label for="">Payment id :</label>
-<input type="text" id="order-pay-id">
-<label for="">Order signature :</label>
-<input type="text" id="order-sig">
-<br>
-<button id="verify-button1">Verify </button>
-<script>
-    document.getElementById('verify-button1').onclick = function(e) {
-        var url = '/api/payment/verify';
-        var params = {
-            razorpay_order_id: document.getElementById('order-id').value,
-            razorpay_payment_id: document.getElementById('order-pay-id').value,
-            razorpay_signature: document.getElementById('order-sig').value
-        };
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function(res) {
+      </script>
+
+      <script>
+        document.getElementById("verify-button1").onclick = function (e) {
+          var url = "/api/payment/verify";
+          var params = {
+            razorpay_order_id: document.getElementById("order-id").value,
+            razorpay_payment_id: document.getElementById("order-pay-id").value,
+            razorpay_signature: document.getElementById("order-sig").value,
+          };
+          var xmlHttp = new XMLHttpRequest();
+          xmlHttp.onreadystatechange = function (res) {
             if (xmlHttp.readyState === 4) {
-                alert(xmlHttp.responseText);
+              alert(xmlHttp.responseText);
             }
-        }
-        xmlHttp.open("POST", url, true); // false for synchronous request
-        xmlHttp.setRequestHeader("Content-type", "application/json");
-        xmlHttp.send(JSON.stringify(params));
-    }
-</script>
+          };
+          xmlHttp.open("POST", url, true); // false for synchronous request
+          xmlHttp.setRequestHeader("Content-type", "application/json");
+          xmlHttp.send(JSON.stringify(params));
+        };
+      </script>
+    </div>
+  </body>
+</html>
