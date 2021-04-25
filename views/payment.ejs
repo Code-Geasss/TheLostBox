@@ -134,6 +134,7 @@
     <div class="container">
       <label for="">Amount: </label>
       <input type="text" id="order-amt" />
+      <input type="hidden" name="rid" id="rid" value="<%= rid %>"/>
       <br />
       <!-- Get order id from razorpay -->
       <input type="submit" value="Create Order" id="order-button1">
@@ -142,21 +143,19 @@
 
       <br />
       <hr />
-      <label for="">Order id: </label>
-      <input type="text" name="" id="rzp-text" />
+      <!-- <label for="">Order id: </label> -->
+      <input type="hidden" name="" id="rzp-text" />
       <br />
-      <input type="submit" value="Checkout" id="rzp-button1">
+      <input type="submit" value="Proceed to Pay" id="rzp-button1" disabled>
       <!-- <button id="rzp-button1">Checkout</button> -->
       <div id="paymentDetails"></div>
 
       <br />
       <hr />
-      <label for="">Order id :</label>
-      <input type="text" id="order-id" />
-      <label for="">Payment id :</label>
-      <input type="text" id="order-pay-id" />
-      <label for="">Order signature :</label>
-      <input type="text" id="order-sig" />
+      
+      <input type="hidden" id="order-id" />
+      <input type="hidden" id="order-pay-id" />
+      <input type="hidden" id="order-sig" />
       <br />
       <input type="submit" value="Verify" id="verify-button1">
       <!-- <button id="verify-button1">Verify</button> -->
@@ -165,7 +164,7 @@
         document.getElementById("order-button1").onclick = function (e) {
           var url = "/api/payment/order";
           var params = {
-            amount: document.getElementById("order-amt").value,
+            amount: document.getElementById("order-amt").value*100,
             currency: "INR",
             receipt: "thelostbox",
             payment_capture: "1",
@@ -180,6 +179,7 @@
           xmlHttp.open("POST", url, true);
           xmlHttp.setRequestHeader("Content-type", "application/json");
           xmlHttp.send(JSON.stringify(params));
+          document.getElementById("rzp-button1").disabled = false;
         };
       </script>
 
@@ -217,6 +217,8 @@
             razorpay_order_id: document.getElementById("order-id").value,
             razorpay_payment_id: document.getElementById("order-pay-id").value,
             razorpay_signature: document.getElementById("order-sig").value,
+            rid: document.getElementById('rid').value,
+            amt: document.getElementById("order-amt").value,
           };
           var xmlHttp = new XMLHttpRequest();
           xmlHttp.onreadystatechange = function (res) {

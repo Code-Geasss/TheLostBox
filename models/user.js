@@ -37,6 +37,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         trim: true  
     },
+    rewards:{
+      type:Number,
+    },
     resetPasswordToken: String,
     resetPasswordExpires: Date,
 });

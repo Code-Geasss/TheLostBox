@@ -6,30 +6,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>New Notification</title>
+ <!-- Favicons -->
+ <link href="/img/favicon.png" rel="icon">
+ <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+ <!-- Google Fonts -->
+ <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+ <!-- Vendor CSS Files -->
+ <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+ <link href="/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+ <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+ <link rel='stylesheet' href='https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css'>
+ <link href="/vendor/aos/aos.css" rel="stylesheet">
+ <link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+ <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+ <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+
+ <link href="/css/style.css" rel="stylesheet">
+ <link href="/css/thebox.css" rel="stylesheet">
+ <link href="/css/notification.css" rel="stylesheet">
+
+
+
+
+
 </head>
 <body>
-    
-    <% for (index in result) { %>
-           
-            <% if (currentUser._id == result[index].senderId) {%>
-                <% if (result[index].isAccept === 1) {%>
-                    
-                    <a href="/box/<%= result[index].id %>"><h3>View ur lost prodcut</h3></a>
-                <% } else if (result[index].isAccept === 0){%>
-                    <h2>Ur Request has been sent</h2>
-                <% } else { %>
-                    <h2>Sorry ur Product was not found by <%= result[index].receiverID.fullname %></h2>
-                <% } %>
-            <%} else { %>
-                <% if (result[index].isAccept == 0) { %>
-                    <a href="/accept/<%= result[index]._id %>"><button class="button">Accept</button></a>
-                    <a href="/reject/<%= result[index]._id %>"><button class="button">Reject</button></a>
-                    <br>
-                <% } %>
+     <!-- ======= Header ======= -->
+ <header id="header" class="header fixed-top">
+   <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-          <% } %>
-    
-    <% } %>
+     <a href="/" class="logo d-flex align-items-center">
+       <img src="/img/logo.png" alt="">
+       <span>The LostBox</span>
+     </a>
+
+     <nav id="navbar" class="navbar">
+       <ul>
+         <li><a class="nav-link scrollto active" href="/">Home</a></li>       
+         <li><a class="nav-link scrollto" href="/box">The Box</a></li>  
+         <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
+           <ul>
+             <li><a href="/chatlist/<%= currentUser._id %>">Chats</a></li>
+             <!-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+               <ul>
+                 <li><a href="#">Deep Drop Down 1</a></li>
+                 <li><a href="#">Deep Drop Down 2</a></li>
+                 <li><a href="#">Deep Drop Down 3</a></li>
+                 <li><a href="#">Deep Drop Down 4</a></li>
+                 <li><a href="#">Deep Drop Down 5</a></li>
+               </ul>
+             </li> -->
+             <li><a href="/logout">Logout</a></li>
+           </ul>
+         </li>
+       </ul>
+       <i class="bi bi-list mobile-nav-toggle"></i>
+     </nav><!-- .navbar -->
+
+   </div>
+ </header><!-- End Header -->
+ <br>
+   <br>
+   <br>
+   <br>
+
+   <% for (index in result) { %>
+       <div class="container">
+           <div class="card">
+            
+             <p class="card__name">Vinit Mundra</p>
+             <div class="grid-container">
+         
+              
+         
+               
+         
+             </div>
+             
+             <!-- <button class="btn draw-border">Follow</button>
+             <button class="btn draw-border">Message</button> -->
+         
+           </div>
+           
+         </div>
+         
+           <% if (currentUser._id == result[index].senderId) {%>
+               <% if (result[index].isAccept === 1) {%>
+                   
+               <% } %>
+           <%} else { %>
+               <% if (result[index].isAccept == 0) { %>
+                   <a href="/accept/<%= result[index]._id %>"><button class="btn draw-border">Accept</button></a>
+                   <a href="/reject/<%= result[index]._id %>"><button class="btn draw-border">Reject</button></a>
+                   <br>
+               <% } %>
 
 </body>
 </html>
