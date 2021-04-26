@@ -17,13 +17,16 @@ router.get('/price/:title/:id',function(req,res){
         var data = body;
         console.log(data);
 
+        data = data.replace(/,/g, "");
+        data1 = parseInt(data);
+
         Post.findOneAndUpdate({ "posts._id": postId },{$set:{ 
-                'posts.$.cost': data,
+                'posts.$.cost': data1,
           }},
            {new:true},function(err,post){
                 if(err){
+                    console.log(err);
                     // It is coming here from flask server.
-                    res.redirect("/post/${req.params.id}/edit");  
                 }
                 else{
                    
