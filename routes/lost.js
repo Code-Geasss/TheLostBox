@@ -13,11 +13,12 @@ router.post("/form",function(req,res,next){
     var brand = req.body.bname;
     var color = req.body.color;
     var category_name = req.body.category;
+    var currentUser = req.user;
 
     Post.aggregate([
         {$match:{category_name:category_name}},
         {$unwind:"$posts"},
-        {$match:{"posts.color":color,"posts.brandname":brand}}
+        {$match:{"posts.color":color,"posts.brandname":brand,"posts.postedBy":{'$ne':currentUser._id}}},
     ]).exec(function(err,result){
         if(err) console.log(err);
         console.log(result);

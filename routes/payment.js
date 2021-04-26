@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const passport = require('passport');
 var crypto = require('crypto');
-const bcrypt = require('bcrypt');
-var async = require('async');
-var nodemailer = require('nodemailer');
+
+const { isAuthenticated, unauthorised } = require('../config/auth_required');
 
 const bodyParser = require('body-parser');
 const Razorpay = require("razorpay");

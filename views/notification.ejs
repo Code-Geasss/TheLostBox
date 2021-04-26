@@ -72,37 +72,42 @@
    <br>
    <br>
    <br>
-
-   <% for (index in result) { %>
-       <div class="container">
-           <div class="card">
-            
-             <p class="card__name">Vinit Mundra</p>
-             <div class="grid-container">
-         
-              
-         
-               
-         
-             </div>
+ 
+      <% for (index in result) { %>
+          <div class="container">
+            <div class="card">
              
-             <!-- <button class="btn draw-border">Follow</button>
-             <button class="btn draw-border">Message</button> -->
-         
-           </div>
+              <p class="card__name">Vinit Mundra</p>
+              <div class="grid-container">  
+          
+              </div>
+              <% if (currentUser._id == result[index].senderId) {%>
+                <% if (result[index].isAccept === 1) {%>
+                    
+                    <a href="/box/<%= result[index].id %>"><h3>View ur lost prodcut</h3></a>
+                <% } else if (result[index].isAccept === 0){%>
+                    <h2>Ur Request has been sent</h2>
+                <% } else { %>
+                    <h2>Sorry ur Product was not found by <%= result[index].receiverID.fullname %></h2>
+                <% } %>
+            <%} else { %>
+                <% if (result[index].isAccept == 0) { %>
+                    <a href="/accept/<%= result[index]._id %>"><button class="btn draw-border">Accept</button></a>
+                    <a href="/reject/<%= result[index]._id %>"><button class="btn draw-border">Reject</button></a>
+                    <br>
+                <% } %>
+          <% } %>
+              
+              <!-- <button class="btn draw-border">Follow</button>
+              <button class="btn draw-border">Message</button> -->
+          
+            </div>
+            
+          </div>
            
-         </div>
          
-           <% if (currentUser._id == result[index].senderId) {%>
-               <% if (result[index].isAccept === 1) {%>
-                   
-               <% } %>
-           <%} else { %>
-               <% if (result[index].isAccept == 0) { %>
-                   <a href="/accept/<%= result[index]._id %>"><button class="btn draw-border">Accept</button></a>
-                   <a href="/reject/<%= result[index]._id %>"><button class="btn draw-border">Reject</button></a>
-                   <br>
-               <% } %>
+  
+  <% } %>
 
 </body>
 </html>
