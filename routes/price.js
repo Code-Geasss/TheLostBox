@@ -23,6 +23,7 @@ router.get('/price/:title/:id',function(req,res){
           }},
            {new:true},function(err,post){
                 if(err){
+                    // It is coming here from flask server.
                     res.redirect("/post/${req.params.id}/edit");  
                 }
                 else{

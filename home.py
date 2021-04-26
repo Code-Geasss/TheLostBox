@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from selenium.webdriver.chrome.options import Options
 from  selenium import webdriver
 from bs4 import BeautifulSoup
 import requests
@@ -9,7 +10,9 @@ app = Flask(__name__)
 def index(title):
     print(title)
 
-    driver = webdriver.Chrome('C:/Users/vinit/Downloads/chromedriver_win32/chromedriver.exe')
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    driver = webdriver.Chrome('C:/Users/vinit/Downloads/chromedriver_win32/chromedriver.exe',options=chrome_options)
     HEADERS = {"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:66.0) Gecko/20100101 Firefox/66.0", "Accept-Encoding":"gzip, deflate", "Accept":"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8", "DNT":"1","Connection":"close", "Upgrade-Insecure-Requests":"1"}
 
     url = 'https://www.amazon.in/s?k='
