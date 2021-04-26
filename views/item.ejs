@@ -172,8 +172,8 @@
                     <h6><b>Category:</b> <%= data.posts[0].category %> </h6><br>
                     
                     <a href="/price/<%= data.posts[0].description %>/<%= data.posts[0]._id %>"><input type="submit" value="Get Estimated Price" id="order-button1"></a>
-                    <a href="/payments/<%= data.posts[0].postedBy %>/<%= data.posts[0]._id %>"><input type="submit" value="Proceed to Buy" id="order-button1"></a>
-                    <a href="/>"><input type="submit" value="Chat" id="order-button1"></a>
+                    <a href="/payments/<%= data.posts[0].postedBy._id %>/<%= data.posts[0]._id %>"><input type="submit" value="Proceed to Buy" id="order-button1"></a>
+                    <a href="/chats/<%= currentUser._id %>/<%= data.posts[0].postedBy._id %>"><input type="submit" value="Chat" id="order-button1"></a>
                     
   
                 </div>

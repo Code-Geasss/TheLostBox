@@ -164,7 +164,7 @@
         document.getElementById("order-button1").onclick = function (e) {
           var url = "/api/payment/order";
           var params = {
-            amount: document.getElementById("order-amt").value*100,
+            amount: document.getElementById("order-amt").value*10,
             currency: "INR",
             receipt: "thelostbox",
             payment_capture: "1",
@@ -176,6 +176,7 @@
               document.getElementById("rzp-text").value = res.sub.id;
             }
           };
+          console.log(document.getElementById("order-amt").value);
           xmlHttp.open("POST", url, true);
           xmlHttp.setRequestHeader("Content-type", "application/json");
           xmlHttp.send(JSON.stringify(params));
@@ -204,6 +205,8 @@
               color: "#0EB9F2",
             },
           };
+          console.log("paying");
+          console.log(options);
           var rzp1 = new Razorpay(options);
           rzp1.open();
           e.preventDefault();

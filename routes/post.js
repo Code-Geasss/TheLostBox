@@ -217,7 +217,7 @@ router.delete('/post/:id',isAuthenticated,function(req,res){
 
 router.get('/box/:id',isAuthenticated,function(req,res){
     var postid=req.params.id;
-    //console.log(postid);
+    var currentUser = req.user;
     
     Post.find({ "posts._id" : postid},{posts:{ $elemMatch:{_id:postid}}})
     .populate('posts.postedBy')
@@ -230,7 +230,7 @@ router.get('/box/:id',isAuthenticated,function(req,res){
             console.log(result);
             var data = result[0]; 
             // console.log(data.posts[0].postedBy); 
-            res.render("item", {data: data});
+            res.render("item", {data: data,currentUser: currentUser});
         }
     });
 });

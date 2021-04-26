@@ -18,6 +18,9 @@ const instance = new Razorpay({
 router.get("/payments/:id/:id2",(req,res)=>{
     var rid= req.params.id;
     var postId = req.params.id2;
+    console.log("ok");
+    console.log(rid);
+    console.log(postId);
 
     Post.findOne({"posts._id": postId},{posts:{ $elemMatch:{_id:postId}}},function(err,result){
            if(err){
@@ -36,6 +39,8 @@ router.get("/payments/:id/:id2",(req,res)=>{
 router.post("/api/payment/order",(req,res)=>{
 
     params = req.body;
+    console.log("Printinginginginging")
+    console.log(params);
     instance.orders
         .create(params)
         .then((data)=>{

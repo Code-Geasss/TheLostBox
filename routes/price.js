@@ -11,6 +11,9 @@ router.get('/price/:title/:id',function(req,res){
     var postId = req.params.id;
     console.log(postId);
 
+    title = title.replace(/ /g, '%20');
+    console.log(title);
+
     request('http://127.0.0.1:3000/home/'+title, function (error, response, body) {
         console.error('error:', error); // Print the error
         console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
@@ -31,7 +34,7 @@ router.get('/price/:title/:id',function(req,res){
                 }
                 else{
                    
-                    res.redirect("/");
+                   res.redirect(req.get('referer')); //this to redirect to the page from where u came.
                 }
             });
       }); 
