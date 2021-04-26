@@ -8,8 +8,8 @@ const notificationSchema = new mongoose.Schema({
         required : true
     },
     senderId : {
-        type : String,
-        required : true
+        type : ObjectId,
+        ref : "User",
     },
     receiverID : {
         type : ObjectId,
@@ -18,6 +18,10 @@ const notificationSchema = new mongoose.Schema({
     brandName : {
         type : String,
         required : true
+    },
+    description:{
+        type:String,
+        required:true
     },
     isAccept : {
         type : Number,

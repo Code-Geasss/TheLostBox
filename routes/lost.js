@@ -3,51 +3,64 @@ const router = express.Router();
 
 const Post = require('../models/post');
 const Notification = require('../models/notification');
+const { isAuthenticated, unauthorised } = require('../config/auth_required');
 
-router.get("/form",function(req,res,next){  
-    res.render('lostform');  
+router.get("/form",isAuthenticated,function(req,res,next){ 
+    var errMsg = req.flash('error')[0]; 
+    res.render('lostform',{currentUser: req.user,errMsg: errMsg, noMessages: !errMsg });  
 });
 
-router.post("/form",function(req,res,next){
+router.post("/form",unauthorised,function(req,res,next){
     
     var brand = req.body.bname;
     var color = req.body.color;
     var category_name = req.body.category;
+    var description=req.body.description;
     var currentUser = req.user;
 
-    Post.aggregate([
-        {$match:{category_name:category_name}},
-        {$unwind:"$posts"},
-        {$match:{"posts.color":color,"posts.brandname":brand,"posts.postedBy":{'$ne':currentUser._id}}},
-    ]).exec(function(err,result){
-        if(err) console.log(err);
-        console.log(result);
+    if(description.length == 0 || category_name.length == 0 || 
+        color.length == 0 || brand.length == 0){
+            console.log("err ke andar");
+            req.flash('error', 'Please fill all the fields'); 
+            res.redirect("/form");
+    }
+    else{
 
-        for(index in result){
-            var newNotification = new Notification({
-                id : result[index].posts._id,
-                senderId : req.user._id,
-                receiverID : result[index].posts.postedBy,
-                brandName : brand,
-                isAccept : 0
-            });
+        Post.aggregate([
+            {$match:{category_name:category_name}},
+            {$unwind:"$posts"},
+            {$match:{"posts.color":color,"posts.brandname":brand,"posts.postedBy":{'$ne':currentUser._id}}},
+        ]).exec(function(err,result){
+            if(err) console.log(err);
+            console.log(result);
 
-            console.log(newNotification);
-            newNotification.save(function(err,result){
-                if(err){
-                    console.log(err);
-                }
-                else{
-                    console.log("ok");
-                }
-            });
-        }
-        res.redirect('/');
-    });
+            for(index in result){
+                var newNotification = new Notification({
+                    id : result[index].posts._id,
+                    senderId : req.user._id,
+                    receiverID : result[index].posts.postedBy,
+                    brandName : brand,
+                    description:description,
+                    isAccept : 0
+                });
+
+                console.log(newNotification);
+                newNotification.save(function(err,result){
+                    if(err){
+                        console.log(err);
+                    }
+                    else{
+                        console.log("ok");
+                    }
+                });
+            }
+            res.redirect('/');
+        });
+    }
 });
 
 
-router.get('/accept/:id',function(req,res){
+router.get('/accept/:id',unauthorised,function(req,res){
 
     var noteId = req.params.id;
     Notification.findOneAndUpdate({
@@ -67,7 +80,7 @@ router.get('/accept/:id',function(req,res){
 });
 
 
-router.get('/reject/:id',function(req,res){
+router.get('/reject/:id',unauthorised,function(req,res){
 
     var noteId = req.params.id;
     Notification.findOneAndUpdate({
@@ -86,18 +99,19 @@ router.get('/reject/:id',function(req,res){
     });
 });
 
-router.get('/notification',function (req,res) {
+router.get('/notification',isAuthenticated ,function (req,res) {
     var currentUser = req.user;
                
     Notification.find({
         $or : [{"senderId" : currentUser._id}, {"receiverID" : currentUser._id}]
     })
-    .populate('receiverID')
+    .populate('receiverID senderId')
     .exec(function(err,result){
         if(err){
             console.log(err);
         }
         else{
+            console.log("hy");
             console.log(result);
             res.render('notification',{result:result ,currentUser:currentUser}); 
         }

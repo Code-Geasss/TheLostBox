@@ -44,7 +44,7 @@ const postRoutes = require('./routes/post');
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const chatRoutes = require('./routes/chat');
-const employeeRoutes = require('./routes/lost');
+const lostRoutes = require('./routes/lost');
 const paymentRoutes = require('./routes/payment');
 const priceRoutes = require('./routes/price');
 
@@ -181,7 +181,7 @@ app.use(authRoutes);
 app.use(postRoutes);
 app.use(chatRoutes);
 app.use(userRoutes);
-app.use(employeeRoutes);
+app.use(lostRoutes);
 app.use(paymentRoutes);
 app.use(priceRoutes);
 

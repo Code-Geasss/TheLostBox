@@ -74,19 +74,12 @@
           <nav id="navbar" class="navbar">
             <ul>
               <li><a class="nav-link scrollto active" href="/">Home</a></li>       
-              <li><a class="nav-link scrollto" href="/box">The Box</a></li>  
-              <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
+               
+              <li class="dropdown"><a href="#"><span>More</span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
+                  <li><a href="/notification">Notifications</a></li>
                   <li><a href="/chatlist/<%= currentUser._id %>">Chats</a></li>
-                  <!-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                    <ul>
-                      <li><a href="#">Deep Drop Down 1</a></li>
-                      <li><a href="#">Deep Drop Down 2</a></li>
-                      <li><a href="#">Deep Drop Down 3</a></li>
-                      <li><a href="#">Deep Drop Down 4</a></li>
-                      <li><a href="#">Deep Drop Down 5</a></li>
-                    </ul>
-                  </li> -->
+                  <li><a href="/profile">Profile</a></li>
                   <li><a href="/logout">Logout</a></li>
                 </ul>
               </li>
@@ -105,10 +98,11 @@
 
 
 <div class="container">
+  <div style="text-align: center;" id="danger" class="alert alert-danger <% if(noMessages){ %> d-none <% } %>" >
+    <%= errMsg %>
+  </div>
  
-       
-                    <form action="/form" id="EmployeeForm" class="form-horizontal" method="post"  role="form">
-
+        <form action="/form" id="EmployeeForm" class="form-horizontal" method="post"  role="form">
 
             <label for="objname">Brand Name</label>
             <input type="text" id="objname" name="bname" placeholder="Brand Name.."><br>
@@ -124,74 +118,14 @@
                 <option value="others">OTHER PRODUCTS</option>
             </select><br>
             <br>
+            <label for="description">Description</label>
+            <textarea id="description" name="description" placeholder="Describe the item.." style="height:200px"></textarea>
             <br>
             <input type="submit" value="Submit">
-                        <!-- <div id="signupalert" style="display:none" class="alert alert-danger">
-                            <p>Error:</p>
-                            <span></span>
-                        </div>
-                            
-                        <div class="form-group">
-                            <label for="firstname" class="col-md-3 control-label">Name</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" name="bname" placeholder="Enter Brand Name">
-                            </div>
-                        </div>
-                          
-                        <div class="form-group">
-                            <label for="color" class="col-md-3 control-label">Color</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" name="color" placeholder="Color">
-                            </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="category" class="col-md-3 control-label">Category</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" name="category" placeholder="Enter The Category">
-                            </div>
-                        </div> -->
-                            
-                        
-                        <!-- <div class="form-group">
-                            <label for="lastname" class="col-md-3 control-label">Employee Type</label>
-                            <div class="col-md-9">
-                                <select class="form-control" name="emptype">
-                                <option value="Hourly">Hourly</option>
-                                <option value="Fixed">Fixed</option>
-                                </select>
-                            </div>
-                        </div>
-                         -->
-                            
-                        <!-- <div class="form-group">
-                            <label for="icode" class="col-md-3 control-label"> Total Hour</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" name="ttlhr" placeholder="Enter Total Hours">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="icode" class="col-md-3 control-label"> Profile Image</label>
-                            <div class="col-md-9">
-                                <input type="file" class="form-control" name="file" >
-                            </div>
-                        </div> -->
-
-                        <!-- <div class="form-group"> -->
-                            <!-- Button -->                                        
-                            <!-- <div class="col-md-offset-3 col-md-9">
-                            <input type="submit" name="submit" value="submit" class="btn btn-primary">   
-                            </div>
-                        </div> -->
-                        
-                        
-                        
-                        
-                        
-                    </form>
-               
-            </div>
-            
+            </form>
+        
+    </div>
+    
 
 </html>

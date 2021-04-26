@@ -46,20 +46,13 @@
      <nav id="navbar" class="navbar">
        <ul>
          <li><a class="nav-link scrollto active" href="/">Home</a></li>       
-         <li><a class="nav-link scrollto" href="/box">The Box</a></li>  
-         <li class="dropdown"><a href="#"><span>Profile</span> <i class="bi bi-chevron-down"></i></a>
+          
+         <li class="dropdown"><a href="#"><span>More</span> <i class="bi bi-chevron-down"></i></a>
            <ul>
-             <li><a href="/chatlist/<%= currentUser._id %>">Chats</a></li>
-             <!-- <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-               <ul>
-                 <li><a href="#">Deep Drop Down 1</a></li>
-                 <li><a href="#">Deep Drop Down 2</a></li>
-                 <li><a href="#">Deep Drop Down 3</a></li>
-                 <li><a href="#">Deep Drop Down 4</a></li>
-                 <li><a href="#">Deep Drop Down 5</a></li>
-               </ul>
-             </li> -->
-             <li><a href="/logout">Logout</a></li>
+            <li><a href="/notification">Notifications</a></li>
+            <li><a href="/chatlist/<%= currentUser._id %>">Chats</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/logout">Logout</a></li>
            </ul>
          </li>
        </ul>
@@ -77,25 +70,30 @@
           <div class="container">
             <div class="card">
              
-              <p class="card__name">Pending Request</p>
-              <div class="grid-container">  
-          
-              </div>
-              <% if (currentUser._id == result[index].senderId) {%>
+              
+              <% if (currentUser._id == result[index].senderId.id) {%>
                 <% if (result[index].isAccept === 1) {%>
-                    
-                    <a href="/box/<%= result[index].id %>"><h3>View ur lost prodcut</h3></a>
+                  <!-- <div class="grid-container">  
+                    <p class="card__name">Your Request is accepted.</p>
+                  </div> -->
+                  <p class="card__name">Your Request is accepted.</p>
+                    <a href="/box/<%= result[index].id %>"><h3>View ur lost product</h3></a>
                 <% } else if (result[index].isAccept === 0){%>
-                    <h2>Ur Request has been sent</h2>
+                    <p class="card__name">Request</p>
+                    <p class="card__name1">Your Request has been sent. Please wait for the response.</p>
                 <% } else { %>
-                    <h2>Sorry ur Product was not found by <%= result[index].receiverID.fullname %></h2>
+                    <p class="card__name">Your Request is rejected.</p>
+                    <p class="card__name1">Sorry ur request was rejected by <%= result[index].receiverID.fullname %></p>
                 <% } %>
             <%} else { %>
                 <% if (result[index].isAccept == 0) { %>
+                    <p class="card__name1">A Request has been made for <%= result[index].brandName %> <%= result[index].description %> by <%= result[index].senderId.fullname %></p>
                     <a href="/accept/<%= result[index]._id %>"><button class="btn draw-border">Accept</button></a>
                     <a href="/reject/<%= result[index]._id %>"><button class="btn draw-border">Reject</button></a>
                     <br>
-                <% } %>
+                <% } else { %>
+                  <p class="card__name">No requests.</p>
+                  <% } %>
           <% } %>
               
               <!-- <button class="btn draw-border">Follow</button>
