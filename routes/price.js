@@ -3,6 +3,7 @@ const router = express.Router();
 const request = require('request');
 
 const Post = require('../models/post');
+const { isAuthenticated, unauthorised } = require('../config/auth_required');
 
 router.get('/price/:title/:id',function(req,res){
 
