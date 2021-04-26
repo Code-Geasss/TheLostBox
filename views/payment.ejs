@@ -164,7 +164,7 @@
         document.getElementById("order-button1").onclick = function (e) {
           var url = "/api/payment/order";
           var params = {
-            amount: document.getElementById("order-amt").value*10,
+            amount: document.getElementById("order-amt").value*100,
             currency: "INR",
             receipt: "thelostbox",
             payment_capture: "1",
