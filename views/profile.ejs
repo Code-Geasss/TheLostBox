@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>The Box</title>
+  <title>The LostBox</title>
   <meta content="" name="description">
 
   <meta content="" name="keywords">
@@ -25,15 +25,38 @@
   <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
 
-  
+
   <link href="/css/style.css" rel="stylesheet">
   <link href="/css/profile.css" rel="stylesheet">
-
   
-
+  
+  
+  <style>
+    div.gallery {
+        margin: 5px;
+        border: 1px solid #ccc;
+        float: left;
+        width: 180px;
+      }
+      
+      div.gallery:hover {
+        border: 1px solid #777;
+      }
+      
+      div.gallery img {
+        width: 100%;
+        height: auto;
+      }
+      
+      div.desc {
+        padding: 15px;
+        text-align: center;
+      }
+  </style>
+ 
 </head>
-<body>
 
+<body>
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top">
@@ -46,118 +69,222 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-            <li class="dropdown"><a href="#"><span>More</span> <i class="bi bi-chevron-down"></i></a>
-                <ul>
-                  <li><a href="/notification">Notifications</a></li>
-                  <li><a href="/chatlist/<%= currentUser._id %>">Chats</a></li>
-                  <li><a href="/profile">Profile</a></li>
-                  <li><a href="/logout">Logout</a></li>
-                </ul>
-              </li>
+            <li><a href="/notification">Notifications</a></li>
+            <li><a href="/chatlist/<%= currentUser._id %>">Chats</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
     </div>
   </header><!-- End Header -->
-  <br>
-  <div class="container emp-profile">
-    <form action="/save" method="post" enctype="multipart/form-data">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-img">
-                    <img src="<%= currentUser.profile_image %>" alt=""/>
-                    <div class="file btn btn-lg btn-primary">
-                        Change Photo
-                        <input type="file" name="photo" accept="image/*">
-                    </div>
-                    
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="profile-head">
-                            <h3>
-                                <%= currentUser.fullname %>
-                            </h3>
-                            <br>
-                            
-                            <h5>Rewards: <%= currentUser.rewards %></h5>
-                                                      
-                    <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#" role="tab" aria-controls="home" aria-selected="true">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
-                        </li>
-                    </ul> -->
-                </div>
-            </div>
-            <div class="col-md-2">
-                <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-work">
-                    <p>WORK LINK</p>
-                    <a href="">Website Link</a><br/>
-                    <a href="">Bootsnipp Profile</a><br/>
-                    <a href="">Bootply Profile</a>
-                    
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="tab-content profile-tab" id="myTabContent">
-                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <!-- <div class="row">
-                                    <div class="col-md-6">
-                                        <label>User Id</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>Vinit123</p>
-                                    </div>
-                                </div> -->
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Name</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" style="margin: 10px;" id="fullName" name="fullname" value="<%= currentUser.fullname %>">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Email</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="email" class="form-control" style="margin: 10px;"id="email" name="email"  value="<%= currentUser.email %>" disabled=true>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>About</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="text" class="form-control" style="margin: 10px;" id="about" name="about" value="<%= currentUser.about %>">
-                                    </div>
-                                </div>
-                                <!-- <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Class</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>TY-Btech Comps A</p>
-                                    </div>
-                                </div> -->
-                    </div>
-                   
-                </div>
-            </div>
-        </div>
-    </form>           
-</div>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
 
+ 
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero d-flex align-items-center">
+
+    <div class="container emp-profile">
+        <form action="/save" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <img src="<%= currentUser.profile_image %>" alt=""/>
+                        <div class="file btn btn-lg btn-primary">
+                            Change Photo
+                            <input type="file" name="photo" accept="image/*">
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="profile-head">
+                                <h3>
+                                    <%= currentUser.fullname %>
+                                </h3>
+                                <br>
+                                
+                                <h5>Rewards: <%= currentUser.rewards %></h5>
+                                                          
+                        <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#" role="tab" aria-controls="home" aria-selected="true">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                            </li>
+                        </ul> -->
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-work">
+                        <p>WORK LINK</p>
+                        <a href="">Website Link</a><br/>
+                        <a href="">Bootsnipp Profile</a><br/>
+                        <a href="">Bootply Profile</a>
+                        
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <!-- <div class="row">
+                                        <div class="col-md-6">
+                                            <label>User Id</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>Vinit123</p>
+                                        </div>
+                                    </div> -->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Name</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" style="margin: 10px;" id="fullName" name="fullname" value="<%= currentUser.fullname %>">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Email</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="email" class="form-control" style="margin: 10px;"id="email" name="email"  value="<%= currentUser.email %>" disabled=true>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>About</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" style="margin: 10px;" id="about" name="about" value="<%= currentUser.about %>">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Class</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>TY-Btech Comps A</p>
+                                        </div>
+                                    </div> -->
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-8">
+                    <p><b>Posts</b></p>
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-8">
+                    <div class="gallery">
+                        <a target="_blank" href="img_5terre.jpg">
+                          <img src="/img/watch.png" alt="Cinque Terre" width="600" height="400">
+                        </a>
+                        <div class="desc">Add a description of the image here</div>
+                      </div>
+                      <div class="gallery">
+                        <a target="_blank" href="img_5terre.jpg">
+                          <img src="/img/watch.png" alt="Cinque Terre" width="600" height="400">
+                        </a>
+                        <div class="desc">Add a description of the image here</div>
+                      </div>
+                      <div class="gallery">
+                        <a target="_blank" href="img_5terre.jpg">
+                          <img src="/img/watch.png" alt="Cinque Terre" width="600" height="400">
+                        </a>
+                        <div class="desc">Add a description of the image here</div>
+                      </div>
+                      <div class="gallery">
+                        <a target="_blank" href="img_5terre.jpg">
+                          <img src="/img/watch.png" alt="Cinque Terre" width="600" height="400">
+                        </a>
+                        <div class="desc">Add a description of the image here</div>
+                      </div>
+                      <div class="gallery">
+                        <a target="_blank" href="img_5terre.jpg">
+                          <img src="/img/watch.png" alt="Cinque Terre" width="600" height="400">
+                        </a>
+                        <div class="desc">Add a description of the image here</div>
+                      </div>
+                      <div class="gallery">
+                        <a target="_blank" href="img_5terre.jpg">
+                          <img src="/img/watch.png" alt="Cinque Terre" width="600" height="400">
+                        </a>
+                        <div class="desc">Add a description of the image here</div>
+                      </div>
+                      <div class="gallery">
+                        <a target="_blank" href="img_5terre.jpg">
+                          <img src="/img/watch.png" alt="Cinque Terre" width="600" height="400">
+                        </a>
+                        <div class="desc">Add a description of the image here</div>
+                      </div>
+                      <div class="gallery">
+                        <a target="_blank" href="img_5terre.jpg">
+                          <img src="/img/watch.png" alt="Cinque Terre" width="600" height="400">
+                        </a>
+                        <div class="desc">Add a description of the image here</div>
+                      </div>
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-8">
+                    <p></p>
+                    
+                    <a href="#" class="btn btn-info" role="button">Edit</a>
+    
+                    <a href="#" class="btn btn-info" role="button">Delete</a>
+                </div>
+                
+                  
+                  
+                  
+                 
+    
+            </div>
+        </form>           
+    </div>
+
+  </section><!-- End Hero -->
 
   
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+  <script src="/vendor/aos/aos.js"></script>
+  <script src="/vendor/php-email-form/validate.js"></script>
+  <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/vendor/purecounter/purecounter.js"></script>
+  <script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="/vendor/glightbox/js/glightbox.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/js/main.js"></script>
+
 </body>
+
 </html>

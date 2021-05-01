@@ -43,6 +43,9 @@ section {
   text-transform: uppercase;
 }
 
+.sideway{
+  width:10px
+}
 .section-header p {
   margin: 10px 0 0 0;
   padding: 0;
