@@ -6,14 +6,14 @@
   grid-gap: 50px;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 80vh;
   background-color: #f5f5f5;
   font-family: 'Baloo Paaji 2', cursive;
 }
 
 .card {
   background-color: #222831;
-  height: 37rem;
+  height: 30rem;
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -25,6 +25,13 @@
 .card__name {
   margin-top: 15px;
   font-size: 1.5em;
+}
+
+.card__name1 {
+  margin-top: 15px;
+  font-size: 1.2em;
+  margin-left: 10px;
+  padding: 5px;
 }
 
 .card__image {

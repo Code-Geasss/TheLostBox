@@ -43,6 +43,9 @@ section {
   text-transform: uppercase;
 }
 
+.sideway{
+  width:10px
+}
 .section-header p {
   margin: 10px 0 0 0;
   padding: 0;
@@ -188,6 +191,7 @@ section {
 */
 .navbar {
   padding: 0;
+  
 }
 
 .navbar ul {
@@ -327,8 +331,8 @@ section {
 }
 
 .navbar-mobile {
-  
-  
+  position: fixed;
+  overflow: hidden;
   top: 0;
   right: 0;
   left: 0;
@@ -402,6 +406,7 @@ section {
 .navbar-mobile .dropdown > .dropdown-active {
   display: block;
 }
+
 
 /*--------------------------------------------------------------
 # Hero Section

@@ -28,7 +28,7 @@ router.get("/payments/:id/:id2",(req,res)=>{
            else{
                console.log(result.posts[0].cost);
                var payAmount = result.posts[0].cost;
-                res.render("payment",{key: process.env.KEY_ID,rid:rid,payAmount:payAmount});
+                res.render("payment",{key: process.env.KEY_ID,rid:rid,payAmount:payAmount,currentUser: req.user});
                
            }
        });    

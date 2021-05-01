@@ -4,7 +4,7 @@ var unauthorised = (req,res,next) => {
 }
 
 var isAuthenticated = (req,res,next) => {
-    if(req.user) return next();
+    if(req.isAuthenticated()) return next();
     return res.redirect('/LogIn');
 }
 
