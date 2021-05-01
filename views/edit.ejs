@@ -2,48 +2,10 @@
 <html lang="en">
 
 <head>
-    <style>
-        body {font-family: Arial, Helvetica, sans-serif;}
-        * {box-sizing: border-box;}
-        
-        input[type=text], select, textarea {
-          width: 100%;
-          padding: 12px;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          box-sizing: border-box;
-          margin-top: 6px;
-          margin-bottom: 16px;
-          resize: vertical;
-        }
-        
-        input[type=submit] {
-          background-color: #283adb;
-          color: white;
-          padding: 12px 20px;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-        }
-        
-        input[type=submit]:hover {
-          background-color: #4727da;
-        }
-        
-        .container {
-            margin-top: 40px;
-            padding-top: 60px;
-          border-radius: 5px;
-          background-color: #f2f2f2;
-          padding: 20px;
-        }
-        </style>
-
-
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>The Box</title>
+  <title>The LostBox</title>
   <meta content="" name="description">
 
   <meta content="" name="keywords">
@@ -63,15 +25,55 @@
   <link href="/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
 
-  
+  <!-- Template Main CSS File -->
   <link href="/css/style.css" rel="stylesheet">
   <link href="/css/thebox.css" rel="stylesheet">
 
-  
+  <!-- =======================================================
+  * Template Name: FlexStart - v1.1.1
+  * Template URL: https://bootstrapmade.com/flexstart-bootstrap-startup-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+  <style>
+    body {font-family: Arial, Helvetica, sans-serif;}
+    * {box-sizing: border-box;}
 
+    input[type=text], select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      resize: vertical;
+    }
+
+    input[type=submit] {
+      background-color: #283adb;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    input[type=submit]:hover {
+      background-color: #4727da;
+    }
+
+    .container {
+        margin-top: 40px;
+        padding-top: 60px;
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 20px;
+    }
+    </style>
 </head>
-<body>
 
+<body>
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top">
@@ -100,9 +102,10 @@
 
     </div>
   </header><!-- End Header -->
-    <br>
-    <br>
-    <br>
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="hero d-flex align-items-center">
+
     <div class="container">
       <div style="text-align: center;" id="danger" class="alert alert-danger <% if(noMessages){ %> d-none <% } %>" >
         <%= errMsg %>
@@ -110,13 +113,13 @@
         <form action="/post/<%= post.posts[0].category %>/<%= post.posts[0]._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
             <label for="fname">Title</label>
             <input type="text" id="fname" name="title" value="<%= post.posts[0].title %>" placeholder="Title.."><br>
-        
-            <!-- <label for="lname">Last Name</label>
-            <input type="text" id="lname" name="lastname" placeholder="Your last name..">
             <br>
-            <label for="itemtype">Item Type</label>
-            <input type="text" id="itemtype" name="itemtype" placeholder="Type of item found">
-            <br> -->
+            <label for="color">Color</label>
+            <input type="text" id="color" name="color" value="<%= post.posts[0].color %>" placeholder="Color..">
+            <br>
+            <label for="brand">Brand name</label>
+            <input type="text" id="brand" name="brand" value="<%= post.posts[0].brandname %>" placeholder="Brand Name">
+            <br>
             <label for="location">Location</label>
             <input type="text" id="location" name="location" value="<%= post.posts[0].location %>" placeholder="Location of item found">
             <br>
@@ -131,7 +134,7 @@
             <label for="description">Description</label>
             <textarea id="description" name="description" placeholder="Describe the item.." style="height:200px"><%= post.posts[0].description %></textarea>
             <br>
-            <br>
+            
             <div class="center">
                 <div class="upload-btn-wrapper">
                     <button class="btn">Upload a file</button>
@@ -145,7 +148,26 @@
 
           </form>
     </div>
+  </section><!-- End Hero -->
+
+  
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+  <script src="/vendor/aos/aos.js"></script>
+  <script src="/vendor/php-email-form/validate.js"></script>
+  <script src="/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/vendor/purecounter/purecounter.js"></script>
+  <script src="/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="/vendor/glightbox/js/glightbox.min.js"></script>
 
 
-    </body>
+  <!-- Template Main JS File -->
+  <script src="/js/main.js"></script>
+  
+
+</body>
+
 </html>

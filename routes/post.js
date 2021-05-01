@@ -141,8 +141,8 @@ router.put('/post/:name/:id',unauthorised,multer({ storage: storage }).single("p
         }
         else{
             Post.findOneAndUpdate({ "posts._id": postId },{$set:{ 
-                'posts.$.title': title.toLowerCase(),
-                'posts.$.category': category.toLowerCase(),
+                'posts.$.title': title,
+                'posts.$.category': category,
                 'posts.$.description': description,
                 'posts.$.location': location,
                 'posts.$.photo': path2,
@@ -191,13 +191,14 @@ router.get('/post/:name/:id/edit',isAuthenticated,function(req,res){
 
 //Delete
 router.delete('/post/:id',isAuthenticated,function(req,res){
-    Post.findByIdAndRemove(req.params.id,function(err){
+    Post.findOneAndUpdate({"posts._id" : req.params.id},{$pull:{"posts":{_id:req.params.id}}},function(err){
         if(err){
             res.redirect('/');
         }
         else{
+            console.log("deleted");
             req.flash('success','Post Deleted sucessfully');
-            res.redirect("/box");
+            res.redirect("/");
         }
     });
 });

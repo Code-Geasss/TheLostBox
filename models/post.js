@@ -42,9 +42,6 @@ const postSchema = new mongoose.Schema({
             type: ObjectId,
             ref: "User"
         },
-        datetime:{
-            type:String,
-        },
         created: {
             type: Date,
             default: Date.now

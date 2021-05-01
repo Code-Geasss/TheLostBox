@@ -201,48 +201,17 @@
                 </div>
                 <div class="col-md-4"></div>
                 <div class="col-md-8">
-                    <div class="gallery">
-                        <a target="_blank" href="img_5terre.jpg">
-                          <img src="/img/watch.png" alt="Cinque Terre" width="600" height="400">
-                        </a>
-                        <div class="butt" style="padding-left: 40px; padding-top: 10px">
-                            <button type="button" class = "btn btn-primary btn-sm">Edit</button>
-                            <button type="button" class = "btn btn-primary btn-sm">Delete</button>
+                    <% for (index in result) { %>
+                        <div class="gallery">
+                            
+                            <a target="_blank" href="/box/<%= result[index].posts._id %>">
+                            <img src="<%= result[index].posts.photo %>" alt="Cinque Terre" width="600" height="400">
+                            </a>
+                            <div class="desc"><%= result[index].posts.description %></div>
+                            
                         </div>
-                        <div class="desc">Add a description of the image here</div>
-                      </div>
-                      <div class="gallery">
-                        <a target="_blank" href="img_5terre.jpg">
-                          <img src="/img/watch.png" alt="Cinque Terre" width="600" height="400">
-                        </a>
-                        <div class="butt" style="padding-left: 40px; padding-top: 10px">
-                            <button type="button" class = "btn btn-primary btn-sm">Edit</button>
-                            <button type="button" class = "btn btn-primary btn-sm">Delete</button>
-                        </div>
-                        <div class="desc">Add a description of the image here</div>
-                      </div>
-                      <div class="gallery">
-                        <a target="_blank" href="img_5terre.jpg">
-                          <img src="/img/watch.png" alt="Cinque Terre" width="600" height="400">
-                        </a>
-                        <div class="butt" style="padding-left: 40px; padding-top: 10px">
-                            <button type="button" class = "btn btn-primary btn-sm">Edit</button>
-                            <button type="button" class = "btn btn-primary btn-sm">Delete</button>
-                        </div>
-                        <div class="desc">Add a description of the image here</div>
-                      </div>
-                      <div class="gallery">
-                        <a target="_blank" href="img_5terre.jpg">
-                          <img src="/img/watch.png" alt="Cinque Terre" width="600" height="400">
-                        </a>
-                        <div class="butt" style="padding-left: 40px; padding-top: 10px">
-                            <button type="button" class = "btn btn-primary btn-sm">Edit</button>
-                            <button type="button" class = "btn btn-primary btn-sm">Delete</button>
-                        </div>
-                        <div class="desc">Add a description of the image here</div>
-                      </div>
-                      
-                      
+                      <% } %>
+                       
                       
                      
                 </div>

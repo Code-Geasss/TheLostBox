@@ -22,7 +22,7 @@ passport.deserializeUser(function(id, done){
 passport.use(new GoogleStrategy({
     clientID: process.env.GCLIENTID,
     clientSecret:process.env.GCLIENTSECRET,
-    callbackURL:"http://localhost:3000/logIn/google/callback",
+    callbackURL:"http://localhost:5000/logIn/google/callback",
     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
     },
     (accessToken,refreshToken,profile,done)=>{

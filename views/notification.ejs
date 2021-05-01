@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>New Notification</title>
+    <title>The LostBox</title>
  <!-- Favicons -->
  <link href="/img/favicon.png" rel="icon">
  <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -67,16 +67,17 @@
    <br>
  
       <% for (index in result) { %>
-          <div class="container">
-            <div class="card">
+          
              
               
-              <% if (currentUser._id == result[index].senderId.id) {%>
+              <% if (currentUser._id == result[index].senderId.id) { %>
+                <div class="container">
+                  <div class="card">
                 <% if (result[index].isAccept === 1) {%>
                   <!-- <div class="grid-container">  
                     <p class="card__name">Your Request is accepted.</p>
                   </div> -->
-                  <p class="card__name">Your Request is accepted.</p>
+                  <p class="card__name">Your Request is accepted for for <%= result[index].brandName %> <%= result[index].description %></p>
                     <a href="/box/<%= result[index].id %>"><h3>View ur lost product</h3></a>
                 <% } else if (result[index].isAccept === 0){%>
                     <p class="card__name">Request</p>
@@ -86,14 +87,15 @@
                     <p class="card__name1">Sorry ur request was rejected by <%= result[index].receiverID.fullname %></p>
                 <% } %>
             <%} else { %>
+              
                 <% if (result[index].isAccept == 0) { %>
+                  <div class="container">
+                    <div class="card">
                     <p class="card__name1">A Request has been made for <%= result[index].brandName %> <%= result[index].description %> by <%= result[index].senderId.fullname %></p>
                     <a href="/accept/<%= result[index]._id %>"><button class="btn draw-border">Accept</button></a>
                     <a href="/reject/<%= result[index]._id %>"><button class="btn draw-border">Reject</button></a>
                     <br>
-                <% } else { %>
-                  <p class="card__name">No requests.</p>
-                  <% } %>
+                <% } %>
           <% } %>
               
               <!-- <button class="btn draw-border">Follow</button>

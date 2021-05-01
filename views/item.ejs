@@ -82,64 +82,6 @@
 
         
         <div class="container">
-            <div class="sidebar" style="width: 300px; float:left; height:100%; margin:10px">
-                <div>
-                    <p><h3><b>Categories</b></h3></p>
-                </div>
-                <br>
-                <div class="categories" >
-                    <a href="#"><p>Apparels</p></a>
-                    <a href="#"><p>Wearables</p></a>
-                    <a href="#"><p>Electronic Items</p></a>
-                    <a href="#"><p>Books</p></a>
-
-                </div>
-                <br>
-
-
-
-                <div>
-                    <p><h3><b>Approximate Price</b></h3></p>
-                </div>
-
-                <br>
-                <div class="slidecontainer">
-                    <input type="range" min="1" max="10000" value="50" class="slider" id="myRange">
-                    <br>
-                    <p>Price:Rs. <span id="demo"></span></p>
-                  </div>
-                  <br>
-                  <script>
-                  var slider = document.getElementById("myRange");
-                  var output = document.getElementById("demo");
-                  output.innerHTML = slider.value;
-                  
-                  slider.oninput = function() {
-                    output.innerHTML = this.value;
-                  }
-                  </script>
-
-
-                <br>
-     
-
-                <div>
-                    <p><h3><b>Color</b></h3></p>
-                </div>
-                  <input type="radio" id="red" name="color">
-                  <label for="red">Red</label><br>
-                  <input type="radio" id="blue" name="color">
-                  <label for="blue">Blue</label><br>
-                  <input type="radio" id="black" name="color">
-                  <label for="black">Black</label><br>
-                  <input type="radio" id="purple" name="color">
-                  <label for="purple">Purple</label><br>
-                  <input type="radio" id="brown" name="color">
-                  <label for="brown">Brown</label><br>
-                  <br>
-                  <button class="button">Filter</button>
-
-            </div>
 
 <!-- Rightside -->
 
@@ -150,7 +92,7 @@
                 
                 <div class="container">
                   <div style="width: 400px; height :400px ;float:left;  margin:10px">
-                  <img src="<%= data.posts[0].photo %>" style="width: 400px; height :400px ; object-fit:fill" alt="">
+                  <img src="<%= data.posts[0].photo %>" style="width: 300px; height :400px ; object-fit:fill" alt="">
                   
 
                 </div>
@@ -164,10 +106,18 @@
                     <h6><b>Color:</b> <%= data.posts[0].color %> </h6><br>
                     <h6><b>Category:</b> <%= data.posts[0].category %> </h6><br>
                     
+                    <% if (currentUser._id == data.posts[0].postedBy) { %>
                     <a href="/price/<%= data.posts[0].description %>/<%= data.posts[0]._id %>"><input type="submit" value="Get Estimated Price" id="order-button1"></a>
                     <a href="/payments/<%= data.posts[0].postedBy._id %>/<%= data.posts[0]._id %>"><input type="submit" value="Proceed to Buy" id="order-button1"></a>
                     <a href="/chats/<%= currentUser._id %>/<%= data.posts[0].postedBy._id %>"><input type="submit" value="Chat" id="order-button1"></a>
                     
+                    <% } else { %>
+                      <a href="/post/<%= data.posts[0].category %>/<%= data.posts[0]._id %>/edit"><input type="submit" value="Edit" id="order-button1"></a>
+                      <form id="delete-form" action="/post/<%= data.posts[0]._id %>?_method=DELETE" method="POST">
+                        <input type="submit" value="Delete" id="order-button1">
+                      </form>
+                
+                    <% } %>
   
                 </div>
 

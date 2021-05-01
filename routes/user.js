@@ -6,6 +6,7 @@ const path = require('path');
 
 
 var User = require('../models/user');
+const Post = require('../models/post');
 
 const MIME_TYPE_MAP = {
     "image/png": "png",
@@ -35,7 +36,16 @@ filename: (req, file, cb) => {
 
 router.get('/profile',isAuthenticated,function(req,res){
     var currentUser= req.user;
-    res.render('profile',{currentUser:currentUser});
+
+    Post.aggregate([
+        {$unwind:"$posts"},
+        {$match:{"posts.postedBy":currentUser._id}},
+    ]).exec(function(err,result){
+        if(err) console.log(err);
+        console.log(result);
+        res.render('profile',{currentUser:currentUser,result:result});
+    });
+   
 });
 
 
