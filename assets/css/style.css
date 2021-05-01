@@ -188,6 +188,7 @@ section {
 */
 .navbar {
   padding: 0;
+  
 }
 
 .navbar ul {
@@ -327,8 +328,8 @@ section {
 }
 
 .navbar-mobile {
-  
-  
+  position: fixed;
+  overflow: hidden;
   top: 0;
   right: 0;
   left: 0;
@@ -402,6 +403,7 @@ section {
 .navbar-mobile .dropdown > .dropdown-active {
   display: block;
 }
+
 
 /*--------------------------------------------------------------
 # Hero Section
