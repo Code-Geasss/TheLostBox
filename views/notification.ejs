@@ -77,11 +77,13 @@
                   <!-- <div class="grid-container">  
                     <p class="card__name">Your Request is accepted.</p>
                   </div> -->
-                  <p class="card__name">Your Request is accepted for for <%= result[index].brandName %> <%= result[index].description %></p>
+                  <p class="card__name">Your Request is accepted for <%= result[index].brandName %>, <%= result[index].description %></p>
                     <a href="/box/<%= result[index].id %>"><h3>View ur lost product</h3></a>
                 <% } else if (result[index].isAccept === 0){%>
                     <p class="card__name">Request</p>
-                    <p class="card__name1">Your Request has been sent. Please wait for the response.</p>
+                    <p class="card__name1">Your Request has been sent to <%= result[index].receiverID.fullname %>.</p>
+                      <br>
+                      <p>Please wait for the response.</p>
                 <% } else { %>
                     <p class="card__name">Your Request is rejected.</p>
                     <p class="card__name1">Sorry ur request was rejected by <%= result[index].receiverID.fullname %></p>
@@ -91,7 +93,7 @@
                 <% if (result[index].isAccept == 0) { %>
                   <div class="container">
                     <div class="card">
-                    <p class="card__name1">A Request has been made for <%= result[index].brandName %> <%= result[index].description %> by <%= result[index].senderId.fullname %></p>
+                    <p class="card__name1">A Request has been made for <%= result[index].brandName %>, <%= result[index].description %> by <%= result[index].senderId.fullname %></p>
                     <a href="/accept/<%= result[index]._id %>"><button class="btn draw-border">Accept</button></a>
                     <a href="/reject/<%= result[index]._id %>"><button class="btn draw-border">Reject</button></a>
                     <br>

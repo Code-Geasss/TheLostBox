@@ -46,10 +46,9 @@ router.post("/post/create",unauthorised,multer({ storage: storage }).single("pho
     var description=req.body.description;
     var category=req.body.category;
     var location=req.body.location;
-    var datetime=req.body.datetime;
     var color=req.body.color;
     var brand = req.body.brand;
-    //console.log(req.body);
+    console.log(req.body);
 
     var  newPost = new Post(
         {
@@ -59,7 +58,6 @@ router.post("/post/create",unauthorised,multer({ storage: storage }).single("pho
                 category:category,
                 description:description,
                 location:location,
-                datetime:datetime,
                 color:color,
                 brandname:brand,
                 photo:path2,
@@ -71,15 +69,13 @@ router.post("/post/create",unauthorised,multer({ storage: storage }).single("pho
         category:category,
         description:description,
         location:location,
-        datetime:datetime,
         color:color,
         brandname:brand,
         photo:path2,
         postedBy:req.user._id,
     }];
 
-    if(title.length == 0 || description.length == 0 || category.length == 0 || location.length == 0 ||
-        datetime.length == 0 || color.length == 0 || brand.length == 0){
+    if(title.length == 0 || description.length == 0 || category.length == 0 || location.length == 0 || color.length == 0 || brand.length == 0){
             console.log("err ke andar");
             req.flash('error', 'Please fill all the fields'); 
             res.redirect("/post/create");
@@ -219,7 +215,11 @@ router.delete('/post/:id',isAuthenticated,function(req,res){
 router.get('/box/:id',isAuthenticated,function(req,res){
     var postid=req.params.id;
     var currentUser = req.user;
-    
+    console.log("in post.js");
+    console.log(currentUser);
+    console.log("after post.js");
+
+
     Post.find({ "posts._id" : postid},{posts:{ $elemMatch:{_id:postid}}})
     .populate('posts.postedBy')
     .exec(function(err,result){
@@ -230,8 +230,8 @@ router.get('/box/:id',isAuthenticated,function(req,res){
         {
             console.log(result);
             var data = result[0]; 
-            // console.log(data.posts[0].postedBy); 
-            res.render("item", {data: data,currentUser: currentUser});
+            console.log(data.posts[0].postedBy); 
+            res.render("item", {data:data,currentUser:currentUser});
         }
     });
 });
