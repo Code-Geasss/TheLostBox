@@ -1,0 +1,49 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<div class="sidebar" data-color="purple" data-background-color="black" data-image="/images/sidebar-1.jpg">
+    <div class="logo">
+      <a href="/admin/course" class="simple-text logo-normal">
+        <i class="material-icons">person</i>
+      </a>
+    </div>
+    <div class="sidebar-wrapper">
+      <ul class="nav" id="sidebarr">
+        <li class="nav-item ">
+          <a class="nav-link" href="/admin/course">
+            <i class="material-icons">store</i>
+            <p>Products Details</p>
+          </a>
+        </li>
+        <!-- <li class="nav-item ">
+          <a class="nav-link" href="/admin/users">
+            <i class="material-icons">supervised_user_circle</i>
+            <p>Users</p>
+          </a>
+        </li>
+        <li class="nav-item ">
+            <a class="nav-link" href="/admin/admins">
+              <i class="material-icons">how_to_reg</i>
+              <p>Admins</p>
+            </a>
+          </li> -->
+        <li class="nav-item ">
+          <a class="nav-link" href="/user/logout">
+            <i style="transform: rotate(270deg);" class="material-icons">get_app</i>
+            <p>Log out</p>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+<script>
+  $(document).ready(function() {
+
+    $('#orders tr').click(function() {
+        var href = $(this).find("a").attr("href");
+        if(href) {
+            window.location = href;
+        }
+    });
+});
+</script>

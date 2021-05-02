@@ -184,8 +184,14 @@ router.post('/LogIn', passport.authenticate('local.signin', {
         res.redirect(oldUrl);
     } else {
         User.findOne({'email': req.body.email}, function(err, user){
-            console.log('login hogaya');
-            res.redirect('/');   
+          if(user.isAdmin){
+              console.log(user);
+              res.redirect('/admin');   
+          }
+          else{
+
+              res.redirect('/');   
+          }
         });
     }
     

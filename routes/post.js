@@ -112,6 +112,7 @@ router.post("/post/create",unauthorised,multer({ storage: storage }).single("pho
 router.put('/post/:name/:id',unauthorised,multer({ storage: storage }).single("photo"),(req, res, next) => {
     var successMsg = req.flash('success')[0];
     var postId = req.params.id;
+
     console.log(req.body);
     if(req.file == undefined){
         req.flash('error','Please upload an image');
@@ -215,10 +216,7 @@ router.delete('/post/:id',isAuthenticated,function(req,res){
 router.get('/box/:id',isAuthenticated,function(req,res){
     var postid=req.params.id;
     var currentUser = req.user;
-    console.log("in post.js");
-    console.log(currentUser);
-    console.log("after post.js");
-
+    var category = "cards";
 
     Post.find({ "posts._id" : postid},{posts:{ $elemMatch:{_id:postid}}})
     .populate('posts.postedBy')
@@ -231,9 +229,11 @@ router.get('/box/:id',isAuthenticated,function(req,res){
             console.log(result);
             var data = result[0]; 
             console.log(data.posts[0].postedBy); 
-            res.render("item", {data:data,currentUser:currentUser});
+            res.render("item", {data:data,currentUser:currentUser,category:category});
         }
     });
+
+    
 });
 
 

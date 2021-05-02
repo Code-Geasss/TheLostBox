@@ -28,7 +28,7 @@ router.get("/payments/:id/:id2",(req,res)=>{
            else{
                console.log(result.posts[0].cost);
                var payAmount = result.posts[0].cost;
-                res.render("payment",{key: process.env.KEY_ID,rid:rid,payAmount:payAmount,currentUser: req.user});
+                res.render("payment",{key: process.env.KEY_ID,rid:rid,payAmount:payAmount,currentUser: req.user,pid:postId});
                
            }
        });    
@@ -60,8 +60,10 @@ router.post("/api/payment/verify",(req,res)=>{
     console.log("sig" + expectedSignature);
     var response = {status : "failure"};
     var rid = req.body.rid;
+    var pid = req.body.pid;
     var amt = req.body.amt;
     var amt1 = amt*0.75;
+
     if(expectedSignature === req.body.razorpay_signature)
     {
         response = {status : "success"};
@@ -70,8 +72,23 @@ router.post("/api/payment/verify",(req,res)=>{
             console.log(res);
             
         });
+
+        Post.findOneAndUpdate({ "posts._id": pid },{$set:{ 
+                'posts.$.paymentDone': true,
+          }},
+           {new:true},function(err,post){
+                if(err){
+                    console.log(err);
+                    // It is coming here from flask server.
+                }
+                else{
+                   
+                   res.redirect('/'); //this to redirect to the page from where u came.
+                }
+            });
     }   
     res.send(response);
+
 });
 
 module.exports = router;

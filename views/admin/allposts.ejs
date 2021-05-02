@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <title>
+    
+  </title>
+  <link href="/css/course.css" rel="stylesheet">
+  <link href="/css/material-dashboard.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+</head>
+
+<body class="dark-edition">
+  <div class="wrapper ">
+    <%- include ("../partials/admin-sidebar") %>
+
+        
+    <div class="main-panel">
+     <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
+      <div class="container-fluid">
+        <div class="navbar-wrapper">
+          <div class="row ">
+            <a class="navbar-brand" href="javascript:void(0)">Product Details</a>
+          </div>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+        </button>
+      </div>
+     </nav>
+    <!-- End Navbar -->
+      <div class="row justify-content-center">
+        <div class="col-sm-6 col-md-4">
+            <div style="margin-top: 40px;text-align: center;" id="success" class="alert alert-success <% if(noMessages){ %> d-none <% } %>" >
+                <%= successMsg %>
+            </div>
+        </div>
+      </div>
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+                <div class="col-md-12">
+                  <div class="container" style="min-width:100%">
+                     <div class="row">
+                       <div class="col-md-6">
+                          <span >
+                            <div class="input-group ">
+                               <input class=" form-control searchh" type="text" id="myInput" onkeyup="myFunction()" placeholder="  Search.."ng-blur="$ctrl.blur('text')" ng-change="$ctrl.changeText('text')" ng-model-options="{debounce: 500}" ng-model="$ctrl.text">
+                            </div>
+                          </span>      
+                       </div>
+                       
+                       </div>
+                     <br>
+                    <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-ayurveda" role="tabpanel" aria-labelledby="nav-ayurveda-tab">
+                      <div class="card">
+                        <div class="card-body table-responsive">
+                          <table class="table table-hover" id="myTable1">
+                            <thead class="text-warning">
+                              <th>ID</th>
+                              <th>Title</th>
+                              <th>postedBy</th>
+                              <th>Category</th>
+                              <th>Color</th>
+                              <th>Description</th>
+                              <th>Brand Name</th>
+                              <th>Cost Paid</th>
+                              <th>Status</th>
+                              <th></th>
+                              <th></th>
+                            </thead>
+                            <tbody>
+
+                              <% for (index in posts) { %>
+
+                                <% for (index2 in posts[index].posts) { %>
+
+                                      <tr>
+                                        <td><%= posts[index].posts[index2]._id %></td>
+                                        <td><%= posts[index].posts[index2].title %></td>
+                                        <td><%= posts[index].posts[index2].postedBy %></td>
+                                        <td><%= posts[index].posts[index2].category %></td>
+                                        <td><%= posts[index].posts[index2].color %></td>
+                                        <td><%= posts[index].posts[index2].description %></td>
+                                        <td><%= posts[index].posts[index2].brandname %></td>
+                                        <td><%= posts[index].posts[index2].cost %></td>
+                                        
+                                        <% if(posts[index].posts[index2].paymentDone ){ %>
+                                          <td><span class="badge badge-pill badge-success">Available</span></td>
+                                        <% } else { %>
+                                          <td><span class="badge badge-pill badge-danger">Unavailable</span></td>
+                                        <% } %>
+                                          
+                                        <td><a href="/post/<%= posts[index].posts[index2].category %> %>/<%= posts[index].posts[index2]._id %>/edit" class="btn btn-success btn-sm"><i class="fa fa-edit"></i> <strong>Edit</strong></a></td>
+                                  <td>
+                                    <form id="delete-form" action="/post/<%= posts[index].posts[index2]._id %>?_method=DELETE" method="POST">
+                                      <button class=" btn-danger btn-sm"><i class="fa fa-trash"></i> <strong>Delete</strong></a></button>
+                                      
+                                    </tr>
+
+                                  <% } %>
+
+                                <% } %>
+                              
+                              
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>      
+      </div>
+    </div>
+  </div>
+
+    </div>
+  </div>
+
+  <script>
+        function myFunction() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable1");
+        tr = table.getElementsByTagName("tr");
+        for (i = 1; i < tr.length; i++) {
+            // Hide the row initially.
+            tr[i].style.display = "none";
+
+            td = tr[i].getElementsByTagName("td");
+            for (var j = 0; j < td.length; j++) {
+            cell = tr[i].getElementsByTagName("td")[1];
+            if (cell) {
+                if (cell.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                tr[i].style.display = "";
+                break;
+                } 
+            }
+            }
+          }
+        }
+    </script>
+    
+<%- include ("../partials/admin-footer") %>

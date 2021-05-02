@@ -204,9 +204,17 @@
                     <% for (index in result) { %>
                         <div class="gallery">
                             
-                            <a target="_blank" href="/box/<%= result[index].posts._id %>">
+                            
                             <img src="<%= result[index].posts.photo %>" alt="Cinque Terre" width="600" height="400">
+                            
+                            <div class="butt" style="padding-left: 40px; padding-top: 10px">
+                                <a href="/post/<%= result[index].posts.category %> %>/<%= result[index].posts._id %>/edit">
+                                <button type="button" class = "btn btn-primary btn-sm">Edit</button>
                             </a>
+                                <form id="delete-form" action="/post/<%= result[index].posts._id %>?_method=DELETE" method="POST">
+                                    <input type="submit" value="Delete" id="order-button1">
+                                  </form>
+                            </div>
                             <div class="desc"><%= result[index].posts.description %></div>
                             
                         </div>

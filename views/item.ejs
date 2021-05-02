@@ -106,18 +106,12 @@
                     <h6><b>Color:</b> <%= data.posts[0].color %> </h6><br>
                     <h6><b>Category:</b> <%= data.posts[0].category %> </h6><br>
                     
-                    <% if (currentUser._id == data.posts[0].postedBy) { %>
-                    <a href="/price/<%= data.posts[0].description %>/<%= data.posts[0]._id %>"><input type="submit" value="Get Estimated Price" id="order-button1"></a>
+                    <% if (data.posts[0].category !== category) { %>
+                      <a href="/price/<%= data.posts[0].description %>/<%= data.posts[0]._id %>"><input type="submit" value="Get Estimated Price" id="order-button1"></a>
+                    <% } %>
                     <a href="/payments/<%= data.posts[0].postedBy._id %>/<%= data.posts[0]._id %>"><input type="submit" value="Proceed to Buy" id="order-button1"></a>
                     <a href="/chats/<%= currentUser._id %>/<%= data.posts[0].postedBy._id %>"><input type="submit" value="Chat" id="order-button1"></a>
                     
-                    <% } else { %>
-                      <a href="/post/<%= data.posts[0].category %>/<%= data.posts[0]._id %>/edit"><input type="submit" value="Edit" id="order-button1"></a>
-                      <form id="delete-form" action="/post/<%= data.posts[0]._id %>?_method=DELETE" method="POST">
-                        <input type="submit" value="Delete" id="order-button1">
-                      </form>
-                
-                    <% } %>
   
                 </div>
 

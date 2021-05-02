@@ -38,6 +38,9 @@ const postSchema = new mongoose.Schema({
         cost : {
             type : Number,
         },
+        paymentDone : {
+            type : Boolean,
+        },
         postedBy: {
             type: ObjectId,
             ref: "User"
