@@ -25,10 +25,9 @@ router.get("/payments/:id/:id2",(req,res)=>{
            if(err){
                console.log(err);
            }
-           else{
-               console.log(result.posts[0].cost);
+           else{    
                var payAmount = result.posts[0].cost;
-                res.render("payment",{key: process.env.KEY_ID,rid:rid,payAmount:payAmount,currentUser: req.user,pid:postId});
+               res.render("payment",{key: process.env.KEY_ID,rid:rid,payAmount:payAmount,currentUser: req.user,pid:postId});
                
            }
        });    
@@ -58,36 +57,41 @@ router.post("/api/payment/verify",(req,res)=>{
         .digest("hex");
     console.log("sig" + req.body.razorpay_signature);
     console.log("sig" + expectedSignature);
+    console.log("hii inside payment");
     var response = {status : "failure"};
     var rid = req.body.rid;
     var pid = req.body.pid;
     var amt = req.body.amt;
-    var amt1 = amt*0.75;
+    var amt1 = ParseInt(amt*0.75);
 
-    if(expectedSignature === req.body.razorpay_signature)
+
+        console.log("doned one doned one");
+  if(expectedSignature === req.body.razorpay_signature)
     {
         response = {status : "success"};
         User.findOneAndUpdate({"_id":rid},{$inc:{rewards:amt1}},{new:true},function(err,res){
             if(err) console.log(err);
             console.log(res);
-            
+
         });
 
+        console.log(pid);
         Post.findOneAndUpdate({ "posts._id": pid },{$set:{ 
-                'posts.$.paymentDone': true,
-          }},
-           {new:true},function(err,post){
+            'posts.$.paymentDone': true,
+        }},
+        {new:true},function(err,post){
                 if(err){
                     console.log(err);
                     // It is coming here from flask server.
                 }
                 else{
-                   
-                   res.redirect('/'); //this to redirect to the page from where u came.
+                console.log(post);
+                res.redirect('/'); //this to redirect to the page from where u came.
                 }
-            });
-    }   
+        });
+    }
     res.send(response);
+    res.redirect('/');
 
 });
 

@@ -23,7 +23,8 @@ router.get('/price/:title/:id',function(req,res){
 
         data = data.replace(/,/g, "");
         data1 = parseInt(data);
-        data1 = data1;
+        data1 = data1*(0.25);
+        data1 = parseInt(data1);
 
         Post.findOneAndUpdate({ "posts._id": postId },{$set:{ 
                 'posts.$.cost': data1,

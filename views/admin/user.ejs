@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <title>
+    
+  </title>
+  <link href="/css/course.css" rel="stylesheet">
+  <link href="/css/material-dashboard.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+</head>
+
+<body class="dark-edition">
+  <div class="wrapper ">
+    <%- include ("../partials/admin-sidebar") %>
+
+        
+    <div class="main-panel">
+     <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top " id="navigation-example">
+      <div class="container-fluid">
+        <div class="navbar-wrapper">
+          <div class="row ">
+            <a class="navbar-brand" href="javascript:void(0)">Product Details</a>
+          </div>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+          <span class="navbar-toggler-icon icon-bar"></span>
+        </button>
+      </div>
+     </nav>
+    <!-- End Navbar -->
+      
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+                <div class="col-md-12">
+                  <div class="container" style="min-width:100%">
+                     <div class="row">
+                       <div class="col-md-6">
+                          <span >
+                            <div class="input-group ">
+                               <input class=" form-control searchh" type="text" id="myInput" onkeyup="myFunction()" placeholder="  Search.."ng-blur="$ctrl.blur('text')" ng-change="$ctrl.changeText('text')" ng-model-options="{debounce: 500}" ng-model="$ctrl.text">
+                            </div>
+                          </span>      
+                       </div>
+                       
+                       </div>
+                     <br>
+                    <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-ayurveda" role="tabpanel" aria-labelledby="nav-ayurveda-tab">
+                      <div class="card">
+                        <div class="card-body table-responsive">
+                          <table class="table table-hover" id="myTable1">
+                            <thead class="text-warning">
+                              <th>ID</th>
+                              <th>Name</th>
+                              <th>Email</th>
+                            </thead>
+                            <tbody>
+                              <% user.forEach(function(user) { %>
+                                <tr>
+                                  <td><%= user._id %></td>
+                                  <td><%= user.fullname %></td>
+                                  <td><%= user.email %></td>
+                                </tr>
+                                <% }); %>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>      
+      </div>
+    </div>
+  </div>
+
+    </div>
+  </div>
+    
+<%- include ("../partials/admin-footer") %>

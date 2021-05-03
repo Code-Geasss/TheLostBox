@@ -110,7 +110,7 @@
       <label for="">Amount: </label>
       <input disabled type="text" id="order-amt" value="<%= payAmount %>"/>
       <input type="hidden" name="rid" id="rid" value="<%= rid %>"/>
-      <!-- <input type="hidden" name="pid" id="pid" value="<%= pid %>"/> -->
+      <input type="hidden" name="pid" id="pid" value="<%= pid %>"/>
       <br />
       <!-- Get order id from razorpay -->
       <input type="submit" value="Create Order" id="order-button1">
@@ -191,6 +191,7 @@
 
       <script>
         document.getElementById("verify-button1").onclick = function (e) {
+          console.log("hii inside verify");
           var url = "/api/payment/verify";
           var params = {
             razorpay_order_id: document.getElementById("order-id").value,
@@ -206,6 +207,7 @@
               alert(xmlHttp.responseText);
             }
           };
+          console.log(params);
           xmlHttp.open("POST", url, true); // false for synchronous request
           xmlHttp.setRequestHeader("Content-type", "application/json");
           xmlHttp.send(JSON.stringify(params));

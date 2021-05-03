@@ -228,7 +228,6 @@ router.get('/box/:id',isAuthenticated,function(req,res){
         {
             console.log(result);
             var data = result[0]; 
-            console.log(data.posts[0].postedBy); 
             res.render("item", {data:data,currentUser:currentUser,category:category});
         }
     });
