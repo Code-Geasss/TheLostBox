@@ -21,7 +21,7 @@
           </a>
         </li>
         <li class="nav-item ">
-          <a class="nav-link" href="/user/logout">
+          <a class="nav-link" href="/logout">
             <i style="transform: rotate(270deg);" class="material-icons">get_app</i>
             <p>Log out</p>
           </a>
@@ -29,15 +29,3 @@
       </ul>
     </div>
   </div>
-
-<script>
-  $(document).ready(function() {
-
-    $('#orders tr').click(function() {
-        var href = $(this).find("a").attr("href");
-        if(href) {
-            window.location = href;
-        }
-    });
-});
-</script>

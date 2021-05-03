@@ -57,16 +57,15 @@ router.post("/api/payment/verify",(req,res)=>{
         .digest("hex");
     console.log("sig" + req.body.razorpay_signature);
     console.log("sig" + expectedSignature);
-    console.log("hii inside payment");
+    //console.log("hii inside payment");
     var response = {status : "failure"};
     var rid = req.body.rid;
     var pid = req.body.pid;
     var amt = req.body.amt;
-    var amt1 = ParseInt(amt*0.75);
+    var amt1 = parseInt(amt*0.75);
 
 
-        console.log("doned one doned one");
-  if(expectedSignature === req.body.razorpay_signature)
+    if(expectedSignature === req.body.razorpay_signature)
     {
         response = {status : "success"};
         User.findOneAndUpdate({"_id":rid},{$inc:{rewards:amt1}},{new:true},function(err,res){
@@ -75,23 +74,20 @@ router.post("/api/payment/verify",(req,res)=>{
 
         });
 
-        console.log(pid);
+        //console.log(pid);
         Post.findOneAndUpdate({ "posts._id": pid },{$set:{ 
             'posts.$.paymentDone': true,
         }},
         {new:true},function(err,post){
                 if(err){
                     console.log(err);
-                    // It is coming here from flask server.
                 }
                 else{
-                console.log(post);
-                res.redirect('/'); //this to redirect to the page from where u came.
+                //console.log(post);
+                res.redirect('/');
                 }
         });
     }
-    res.send(response);
-    res.redirect('/');
 
 });
 

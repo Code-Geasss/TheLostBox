@@ -23,7 +23,7 @@
       <div class="container-fluid">
         <div class="navbar-wrapper">
           <div class="row ">
-            <a class="navbar-brand" href="javascript:void(0)">Product Details</a>
+            <a class="navbar-brand" href="javascript:void(0)">Users Details</a>
           </div>
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation" data-target="#navigation-example">
@@ -63,6 +63,7 @@
                               <th>ID</th>
                               <th>Name</th>
                               <th>Email</th>
+                              <th>Rewards</th>
                             </thead>
                             <tbody>
                               <% user.forEach(function(user) { %>
@@ -70,6 +71,7 @@
                                   <td><%= user._id %></td>
                                   <td><%= user.fullname %></td>
                                   <td><%= user.email %></td>
+                                  <td><%= user.rewards %></td>
                                 </tr>
                                 <% }); %>
                             </tbody>
@@ -89,5 +91,30 @@
 
     </div>
   </div>
+
+  <script>
+    function myFunction() {
+    var input, filter, table, tr, td, i;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable1");
+    tr = table.getElementsByTagName("tr");
+    for (i = 1; i < tr.length; i++) {
+        // Hide the row initially.
+        tr[i].style.display = "none";
+
+        td = tr[i].getElementsByTagName("td");
+        for (var j = 0; j < td.length; j++) {
+        cell = tr[i].getElementsByTagName("td")[1];
+        if (cell) {
+            if (cell.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+            break;
+            } 
+        }
+        }
+      }
+    }
+</script>
     
 <%- include ("../partials/admin-footer") %>

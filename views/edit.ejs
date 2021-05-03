@@ -131,9 +131,11 @@
                 <option value="others">OTHER PRODUCTS</option>
             </select><br>
             <br>
+            <% if(currentUser.isAdmin) { %>
             <label for="location">Cost</label>
             <input type="text" id="cost" name="cost" value="<%= post.posts[0].cost %>" placeholder="Enter the Cost">
             <br>
+            <% } %>
             <label for="description">Description</label>
             <textarea id="description" name="description" placeholder="Describe the item.." style="height:200px"><%= post.posts[0].description %></textarea>
             <br>

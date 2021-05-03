@@ -12,27 +12,6 @@ input {
     transition: all 300ms ease 0s;
 }
 
-.nav-tabs {
-    border: 0;
-    padding: 15px 0.7rem;
-}
-
-div .nav-tabs .nav-link:hover {
-    background-color: transparent;
-    border-radius: 30px;
-    background-color:#7b1fa2;
-}
-div .nav-tabs .nav-link
-{
-   color:#FFFFFF;
-   border:0;
-}
-div .nav-tabs .nav-item.show .nav-link, 
-div .nav-tabs .nav-link.active {
-    background-color:#7b1fa2;
-    border-radius: 30px;
-    color: #FFFFFF;
-}
 .searchh
 {
  font-size:15px;
