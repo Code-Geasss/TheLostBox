@@ -12,7 +12,7 @@
 ## The owner of the actual product has to fill the Lost Form.
 ![](Readmeimages/lostform.PNG)
 
-## If the person (who got the lost product) thinks the details mentioned in the lost form (filled by actual owner) is valid, he/she rejects or accepts the request.
+## If the person (who got the lost product) thinks the details mentioned in the lost form (filled by actual owner) matches with the actual product, he/she rejects or accepts the request.
 ![](Readmeimages/notification.PNG)
 
 ## If the person accepts the request, the actual owner can see his lost product/item
