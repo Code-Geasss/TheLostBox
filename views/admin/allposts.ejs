@@ -95,9 +95,9 @@
                                         <td><%= posts[index].posts[index2].cost %></td>
                                         
                                         <% if(posts[index].posts[index2].paymentDone ){ %>
-                                          <td><span class="badge badge-pill badge-danger">Payment Not Done</span></td>
-                                        <% } else { %>
                                           <td><span class="badge badge-pill badge-success">Payment Done</span></td>
+                                        <% } else { %>
+                                          <td><span class="badge badge-pill badge-danger">Payment Not Done</span></td>
                                         <% } %>
                                           
                                         <td><a href="/post/<%= posts[index].posts[index2].category %> %>/<%= posts[index].posts[index2]._id %>/edit" class="btn btn-success btn-sm"><i class="fa fa-edit"></i> <strong>Edit</strong></a></td>
