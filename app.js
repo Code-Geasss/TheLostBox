@@ -32,7 +32,7 @@ require('./config/passport');
 const PORT = process.env.PORT || 5000;  
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
-mongoose.connect("mongodb://localhost/Test1")
+mongoose.connect(process.env.MONGODB_URI)
 .then(() => console.log('db connected'));
 
 mongoose.connection.on('error', err => {
