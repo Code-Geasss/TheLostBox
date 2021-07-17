@@ -29,7 +29,7 @@ dotenv.config();
 
 require('./config/passport');
 
-const PORT = process.env.PORT || 5000;  
+const PORT = process.env.PORT;  
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useUnifiedTopology', true);
 mongoose.connect("mongodb://localhost/Test1")
