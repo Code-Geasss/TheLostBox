@@ -50,13 +50,13 @@ router.post('/forgot', function(req, res, next) {
           var smtpTransport = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-              user: 'chintanmodi009@gmail.com',
+              user: 'vinit.mundra@somaiya.edu',
               pass: process.env.EMAIL_PASS
             }
           });
           var mailOptions = {
             to: user.email,
-            from: 'chintanmodi009@gmail.com',
+            from: 'vinit.mundra@somaiya.edu',
             subject: 'Password Reset for your Lostbox account',
             // text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
             //   'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
