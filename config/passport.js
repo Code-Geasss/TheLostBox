@@ -19,50 +19,50 @@ passport.deserializeUser(function(id, done){
     });
 });
 
-passport.use(new GoogleStrategy({
-    clientID: process.env.GCLIENTID,
-    clientSecret:process.env.GCLIENTSECRET,
-    callbackURL:"http://localhost:5000/logIn/google/callback",
-    userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
-    },
-    (accessToken,refreshToken,profile,done)=>{
-        User.findOne({email: profile.emails[0].value},function(err,user){
-            if(err) return done(err);
-            if(user)
-            {
-                console.log("user found");
-                console.log(user);
-                if(user.guid == profile.id){
-                    return done(null,user);
-                }
-                user.guid = profile.id;
-                user.updated = Date.now();  
-                user.save(function(err){
-                    if(err)
-                    {
-                        throw err;
-                    }
-                    return done(null,user);
-                });                
-                // return done(null,user);
-            }
-            else
-            {
-                var newUser = new User();
-                newUser.guid = profile.id;
-                newUser.fullname = profile.name.givenName + ' ' + profile.name.familyName;
-                newUser.email = profile.emails[0].value;
-                newUser.profile_image = profile.photos[0].value;
-                newUser.save(function(err){
-                    if(err)
-                    {
-                        throw err;
-                    }
-                    return done(null,newUser);
-                });
-            }
-        })
-    }));
+// passport.use(new GoogleStrategy({
+//     clientID: process.env.GCLIENTID,
+//     clientSecret:process.env.GCLIENTSECRET,
+//     callbackURL:"http://localhost:5000/logIn/google/callback",
+//     userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
+//     },
+//     (accessToken,refreshToken,profile,done)=>{
+//         User.findOne({email: profile.emails[0].value},function(err,user){
+//             if(err) return done(err);
+//             if(user)
+//             {
+//                 console.log("user found");
+//                 console.log(user);
+//                 if(user.guid == profile.id){
+//                     return done(null,user);
+//                 }
+//                 user.guid = profile.id;
+//                 user.updated = Date.now();  
+//                 user.save(function(err){
+//                     if(err)
+//                     {
+//                         throw err;
+//                     }
+//                     return done(null,user);
+//                 });                
+//                 // return done(null,user);
+//             }
+//             else
+//             {
+//                 var newUser = new User();
+//                 newUser.guid = profile.id;
+//                 newUser.fullname = profile.name.givenName + ' ' + profile.name.familyName;
+//                 newUser.email = profile.emails[0].value;
+//                 newUser.profile_image = profile.photos[0].value;
+//                 newUser.save(function(err){
+//                     if(err)
+//                     {
+//                         throw err;
+//                     }
+//                     return done(null,newUser);
+//                 });
+//             }
+//         })
+//     }));
 
 passport.use('local.signup', new LocalStrategy({
     usernameField: 'email',
